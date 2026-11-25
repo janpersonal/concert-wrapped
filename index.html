@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concert Wrapped 2026!</title>
+<script>
+window.addEventListener('error',function(e){var d=document.getElementById('err');if(!d){d=document.createElement('div');d.id='err';document.body.insertBefore(d,document.body.firstChild)}d.style.cssText='background:#c4512f;color:#fff;padding:10px 14px;font:14px/1.4 sans-serif;position:relative;z-index:99';d.textContent='Something broke: '+e.message+' (line '+e.lineno+'). Please send me this message.'});
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f4edda" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12241a" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Wrapped 2026">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4edda;--ink:#1f3d2b;--card:#fbf6e9;--pink:#c4512f;--yellow:#e3a72f;--mint:#a8c09a;--muted:#667a64;--line:#d8cdad;--rust:#c4512f;--pumpkin:#d9822b;--mustard:#e3a72f;--olive:#6b7f3a;--burgundy:#7a2f22;--plum:#5b3a4a;--sage:#a8c09a;--blush:#e8b7a0;--s1:#c4512f;--s2:#d9822b;--s3:#6b7f3a;--s4:#7a2f22;--s5:#5b3a4a;--accent:#c4512f;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#12241a;--ink:#f1e9d2;--card:#1b3325;--muted:#9fb59b;--line:#2f4d3b;--s1:#f08a5d;--s2:#f0a04b;--s3:#b5cc82;--s4:#e58a7a;--s5:#c99ab0;--accent:#f08a5d;color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 Figtree,system-ui,sans-serif;min-height:100vh;padding:0 0 60px}
+h1,h2,.display{font-family:'Bricolage Grotesque',Impact,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:.95;margin:0}
+.hero{padding:48px 20px 8px;max-width:1100px;margin:auto;text-align:center}
+.eyebrow{font-weight:600;font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin:0 0 16px;padding-left:.34em}
+h1{font-size:clamp(46px,12.5vw,108px);line-height:.9;letter-spacing:-.035em}
+.yearline{display:flex;align-items:center;justify-content:center;gap:18px;margin:20px auto 0;max-width:460px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(20px,5.2vw,30px);letter-spacing:.3em;color:var(--accent)}
+.yearline span{padding-left:.3em}
+.yearline::before,.yearline::after{content:"";flex:1;height:1px;background:currentColor;opacity:.4}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0;justify-content:center}
+.hero .stats{gap:0;margin:30px 0 26px}
+.hero .stat{background:none;color:var(--ink);border-radius:0;padding:2px 20px;border-left:1px solid var(--line);display:flex;flex-direction:column;align-items:center;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.hero .stat:first-child{border-left:none}
+.brk{flex-basis:100%;height:0}
+.hero .stat:nth-child(1) b{color:var(--s1)}.hero .stat:nth-child(2) b{color:var(--s2)}.hero .stat:nth-child(3) b{color:var(--s3)}.hero .stat:nth-child(4) b{color:var(--s4)}.hero .stat:nth-child(5) b{color:var(--s5)}
+.menuwrap{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:14px;z-index:30}
+.burger{width:48px;height:48px;border-radius:50%;border:2px solid var(--ink);background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0;box-shadow:0 4px 14px rgba(31,61,43,.16)}
+.burger span{display:block;width:20px;height:2.5px;border-radius:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.burger[aria-expanded=true] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger[aria-expanded=true] span:nth-child(2){opacity:0}
+.burger[aria-expanded=true] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.menu{position:absolute;top:calc(100% + 8px);right:0;z-index:20;width:250px;max-width:calc(100vw - 32px);background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:8px;box-shadow:0 14px 36px rgba(31,61,43,.22);text-align:left}
+.menu[hidden]{display:none}
+.mrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 8px 10px;border-bottom:1px solid var(--line);margin-bottom:6px;font-size:14px;font-weight:600;color:var(--muted)}
+.mrow label{margin:0;font-size:14px}
+.mi{display:flex;align-items:center;gap:12px;width:100%;border:none;background:none;border-radius:12px;padding:11px 10px;font-weight:600;font-size:16px;text-align:left;cursor:pointer;color:var(--ink)}
+.mi::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--c,var(--rust));flex:none}
+.mi:hover,.mi:focus-visible{background:var(--bg)}
+#wrap{--c:var(--mustard)}#wall{--c:var(--pumpkin)}#cfg{--c:var(--plum)}
+@media (max-width:480px){.hero .stat{padding:2px 11px;font-size:10px;letter-spacing:.12em}.hero .stat b{font-size:30px}.bar{gap:8px}.btn{padding:9px 16px}select{padding:8px 8px}}
+.hero .stat b{font-size:34px;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin:0;text-transform:none}
+.stat{background:var(--ink);color:var(--bg);border-radius:999px;padding:6px 16px;font-weight:600}
+.stat b{font-family:'Bricolage Grotesque',sans-serif;font-size:1.25em;margin-right:6px;color:var(--yellow)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center}
+input,button,textarea{font:inherit;color:inherit}
+input[type=text],input[type=date],input[type=url],textarea,input[type=search]{background:var(--card);border:2px solid var(--ink);border-radius:12px;padding:10px 12px;width:100%}
+input:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.bar input[type=search]{flex:1 1 100%;max-width:440px;width:auto;margin:0 auto 6px;text-align:center;border-radius:999px;padding:12px 18px}
+.btn{background:var(--card);border:2px solid var(--ink);border-radius:999px;padding:10px 20px;font-weight:600;cursor:pointer;box-shadow:none}
+.btn:active{transform:translateY(1px)}
+.btn.pri{background:var(--pink);color:#f8f1de}
+.btn.mint{background:var(--mint);color:#1f3d2b}
+.btn.sm{padding:6px 10px;font-size:14px;box-shadow:none}
+main{max-width:1100px;margin:28px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:28px}
+.ticket{background:var(--card);border:2px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:0 10px 28px rgba(31,61,43,.14);position:relative;display:flex;flex-direction:column}
+
+.poster{aspect-ratio:1;background-size:cover;background-position:center;display:grid;place-items:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:96px;color:rgba(248,241,222,.92)}
+.stub{padding:16px 16px 14px;border-top:3px dashed var(--ink);position:relative}
+.stub::before,.stub::after{content:"";position:absolute;top:-13px;width:22px;height:22px;border-radius:50%;background:var(--bg);border:2px solid var(--ink)}
+.stub::before{left:-13px}.stub::after{right:-13px}
+.date{display:inline-block;background:var(--yellow);color:#1f3d2b;font-weight:600;border-radius:8px;padding:1px 8px;font-size:14px}
+.ticket h2{font-size:28px;margin:10px 0 4px}
+.sub{color:var(--muted);font-size:14px;margin:0}
+.venue{font-weight:600;margin:8px 0 0}
+.note{font-size:14px;margin:8px 0 0}
+.acts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.acts a{color:inherit}
+.empty{grid-column:1/-1;text-align:center;padding:50px 10px;border:3px dashed var(--line);border-radius:20px}
+.empty h2{font-size:34px;margin-bottom:10px}
+dialog{border:2px solid var(--ink);border-radius:20px;background:var(--bg);color:var(--ink);width:min(520px,94vw);padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,24,16,.65)}
+dialog h2{font-size:34px;margin-bottom:14px}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.status{min-height:22px;margin:10px 0 0;font-size:14px;color:var(--muted)}
+.thumb{width:64px;height:64px;border-radius:10px;border:2px solid var(--ink);background:var(--line) center/cover;display:none;margin-top:8px}
+.foot{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+details{margin-top:12px;border:2px solid var(--line);border-radius:14px;padding:4px 12px 12px}summary{cursor:pointer;font-weight:600;padding:8px 0}
+.tile{background:var(--card);padding:5px 5px 4px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.22);transform:rotate(var(--r,0deg));border:1px solid var(--line);min-width:0}
+.tp{aspect-ratio:1;border-radius:6px;background-size:cover;background-position:center;display:grid;place-items:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;color:rgba(248,241,222,.92)}
+.cap{display:flex;flex-direction:column;padding:6px 2px 2px;font-size:12px;line-height:1.25}.cap b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cap span{color:var(--muted)}
+.collage{display:grid;gap:10px;margin-top:6px}.collage .tile{background:#f8f1de;border:none}
+.tile.more{aspect-ratio:1;display:grid;place-items:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;color:#1f3d2b}
+#odlg{width:min(760px,96vw);max-height:92dvh;overflow:auto;padding:22px}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:16px;margin:10px 0 24px}
+.yr{display:inline-block;background:var(--blush);color:#1f3d2b;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;border-radius:999px;padding:2px 16px;margin-top:14px}
+#cdlg{max-height:92dvh;overflow:auto}
+.hd{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;margin:22px 0 2px}
+.srow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn.wr{background:var(--yellow);color:#1f3d2b}
+select{font:inherit;color:inherit;background:var(--card);border:2px solid var(--ink);border-radius:12px;padding:9px 10px}
+#wdlg{width:min(440px,100vw);height:min(760px,100dvh);padding:0;overflow:hidden;border-radius:24px;position:fixed}
+.slide{height:100%;display:flex;flex-direction:column;justify-content:center;padding:70px 28px 90px;cursor:pointer}
+.slide .big{font-family:'Bricolage Grotesque',Impact,sans-serif;font-weight:800;font-size:clamp(44px,13vw,80px);line-height:.95;letter-spacing:-.02em;overflow-wrap:anywhere}
+.slide .kick{font-weight:600;font-size:18px;margin:0 0 12px}
+.slide p.line{font-size:21px;margin:16px 0 0;line-height:1.3}
+.slide ul{list-style:none;padding:0;margin:8px 0 0;font-size:19px;line-height:1.7}
+.prog{position:absolute;top:14px;left:16px;right:60px;display:flex;gap:4px;z-index:2}
+.prog i{flex:1;height:5px;border-radius:3px;background:currentColor;opacity:.25}.prog i.on{opacity:1}
+.wclose{position:absolute;top:22px;right:14px;z-index:2}
+.wnav{position:absolute;bottom:16px;left:16px;right:16px;display:flex;justify-content:space-between;gap:8px;z-index:2}
+@media (prefers-reduced-motion:no-preference){dialog[open]{animation:pop .18s ease-out}@keyframes pop{from{transform:scale(.95);opacity:0}}}
+</style>
+</head>
+<body>
+<div id="nojs" style="background:#e3a72f;color:#1f3d2b;padding:12px 16px;font:15px/1.4 sans-serif"><b>The buttons need JavaScript.</b> If you can still read this, your viewer isn't running the page. Open this file in Chrome, Safari or Firefox (not a file preview), or use your GitHub Pages link.</div>
+  <div class="menuwrap">
+    <button class="burger" id="menuBtn" aria-label="Menu" aria-haspopup="true" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <div class="menu" id="menu" hidden>
+      <div class="mrow"><label for="wyear">Wrapped for</label><select id="wyear" aria-label="Wrapped period"></select></div>
+      <button class="mi" id="wrap">Wrapped</button>
+      <button class="mi" id="wall">Poster wall</button>
+              <button class="mi" id="cfg">Settings</button>
+    </div>
+  </div>
+<header class="hero">
+  <h1>Concert Wrapped</h1>
+  <div class="yearline"><span>2026!</span></div>
+  <div class="stats" id="stats"></div>
+  <div class="bar">
+    <input type="search" id="q" placeholder="Search artist, venue or city" aria-label="Search shows"><span class="brk"></span>
+    <button class="btn pri" id="add">Add a show</button>
+    <input type="file" id="file" accept="application/json" hidden>
+  </div>
+</header>
+<main id="grid"></main>
+
+<dialog id="dlg">
+  <h2 id="dtitle">Add a show</h2>
+  <div class="row">
+    <div><label for="artist">Artist</label><input type="text" id="artist" placeholder="Radiohead"></div>
+    <div><label for="date">Date</label><input type="date" id="date"></div>
+  </div>
+  <button class="btn mint" id="auto" style="margin-top:14px;width:100%">Autofill venue and poster</button>
+  <p class="status" id="status" role="status"></p>
+  <label for="name">Tour or event name</label><input type="text" id="name">
+  <div class="row">
+    <div><label for="venue">Venue</label><input type="text" id="venue"></div>
+    <div><label for="city">City</label><input type="text" id="city"></div>
+  </div>
+  <label for="poster">Poster image link</label><input type="url" id="poster" placeholder="https://…">
+  <label for="upload">Or upload your own ticket or poster photo</label><input type="file" id="upload" accept="image/*">
+  <div class="thumb" id="thumb"></div>
+  <details id="extra"><summary>Extra details for your stats</summary>
+    <div class="row">
+      <div><label for="hours">Hours at the show</label><input type="number" id="hours" min="0" step="0.25" placeholder="2.5"></div>
+      <div><label for="price">Price you paid</label><input type="number" id="price" min="0" step="0.01"></div>
+      <div><label for="face">Original face value</label><input type="number" id="face" min="0" step="0.01" placeholder="Same as paid if bought direct"></div>
+      <div><label for="merch">Merch spent</label><input type="number" id="merch" min="0" step="0.01"></div>
+      <div><label for="platform">Ticketing platform</label><input type="text" id="platform" list="plats" placeholder="Ticketmaster"></div>
+      <div><label for="travel">Travel time to venue (minutes, one way)</label><input type="number" id="travel" min="0" step="1"></div>
+      <div><label for="cap">Venue capacity</label><input type="number" id="cap" min="0" step="1"></div>
+      <div><label for="videoGB">Videos recorded (GB)</label><input type="number" id="videoGB" min="0" step="0.1"></div>
+      <div style="grid-column:1/-1"><label for="born">Performer birth dates (one per member on stage, separated by commas). Type just the names of who performed and Autofill adds the dates.</label><textarea id="born" rows="2" placeholder="Leave empty for the whole group, or: Bang Chan, Han, Felix"></textarea></div>
+      <div><label for="repeatOf">Repeat of an earlier show?</label><select id="repeatOf" style="width:100%"></select></div>
+    </div>
+    <label for="songs">Setlist (one song per line)</label><textarea id="songs" rows="4"></textarea>
+    <datalist id="plats"><option>Ticketmaster<option>AXS<option>Live Nation<option>DICE<option>SeeTickets<option>Eventbrite<option>Box office<option>Gift</datalist>
+  </details>
+  <label for="notes">Notes</label><textarea id="notes" rows="2" placeholder="Who you went with, best song, seats…"></textarea>
+  <div class="foot"><button class="btn" id="cancel">Cancel</button><button class="btn pri" id="save">Save show</button></div>
+</dialog>
+
+<dialog id="wdlg"><div class="prog" id="prog"></div><button class="btn sm wclose" id="wclose" aria-label="Close">Close</button><div id="slide"></div><div class="wnav"><button class="btn sm" id="wprev">Back</button><button class="btn sm" id="wnext">Next</button></div></dialog>
+
+<dialog id="odlg"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><h2 id="wtitle">My concert wall</h2><button class="btn sm" id="oclose">Close</button></div><p class="sub">Every show you've been to. Take a screenshot to share it.</p><div class="stats" id="ostats"></div><div id="wallbody"></div></dialog>
+
+<dialog id="cdlg">
+  <h2>Settings</h2>
+  <label for="uname">Your name (used in Wrapped)</label><input type="text" id="uname" placeholder="Sam" autocomplete="given-name">
+  <div class="hd">Backup</div>
+  <p class="sub">Save all your shows to a file, or load a saved file back in. Useful for moving between devices without sync.</p>
+  <div class="srow"><button class="btn sm" id="export">Export backup</button><button class="btn sm" id="import">Import backup</button></div>
+  <div class="hd">Sync between devices</div>
+  <p class="sub">Optional. Uses a free Supabase project, set up once with <code>supabase-setup.sql</code>. Use the same account on every device.</p>
+  <label for="surl">Project URL</label><input type="url" id="surl" placeholder="https://abcd1234.supabase.co">
+  <label for="skey">Anon public key</label><input type="text" id="skey" placeholder="eyJ…">
+  <div class="row"><div><label for="semail">Email</label><input type="text" id="semail" autocomplete="email"></div><div><label for="spass">Password</label><input type="password" id="spass" autocomplete="current-password"></div></div>
+  <div class="srow"><button class="btn sm" id="sin">Sign in</button><button class="btn sm" id="sup">Create account</button><button class="btn sm mint" id="snow">Sync now</button><button class="btn sm" id="sout">Sign out</button></div>
+  <p class="status" id="syncstat" role="status"></p>
+  <div class="hd">Setlist.fm autofill</div>
+  <p class="sub">Optional. Autofill works without this using MusicBrainz and iTunes. For more complete older shows, deploy the proxy in <code>worker.js</code> to Cloudflare Workers and paste its address here.</p>
+  <label for="proxy">Proxy address</label><input type="url" id="proxy" placeholder="https://setlist-proxy.yourname.workers.dev">
+  <div class="foot"><button class="btn" id="ccancel">Close</button><button class="btn pri" id="csave">Save</button></div>
+</dialog>
+
+<script>
+const $=id=>document.getElementById(id);
+$('nojs').style.display='none';
+function showM(d){try{d.showModal()}catch(e){d.setAttribute('open','')}}
+const KEY='concerts.v1',PKEY='concerts.proxy';
+let shows=[],editId=null,found={};
+try{shows=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){shows=[]}
+let deleted={},userName='',nameAt=0,syncCfg={};
+try{deleted=JSON.parse(localStorage.getItem('concerts.deleted')||'{}')}catch(e){}
+try{const nm=JSON.parse(localStorage.getItem('concerts.name')||'{}');userName=nm.name||'';nameAt=nm.at||0}catch(e){}
+try{syncCfg=JSON.parse(localStorage.getItem('concerts.sync')||'{}')}catch(e){}
+const saveLocal=()=>{try{localStorage.setItem(KEY,JSON.stringify(shows));localStorage.setItem('concerts.deleted',JSON.stringify(deleted));localStorage.setItem('concerts.name',JSON.stringify({name:userName,at:nameAt}))}catch(e){alert('Storage is full. Export your data and use smaller poster images.')}};
+const persist=()=>{saveLocal();syncSoon()};
+const getProxy=()=>{try{return localStorage.getItem(PKEY)||''}catch(e){return ''}};
+const PAL=[['#c4512f','#e3a72f'],['#1f3d2b','#5d8a5a'],['#9a4a22','#d9a441'],['#6b7f3a','#d8c378'],['#7a2f22','#c4512f'],['#2f5a3f','#a8c09a'],['#5b3a4a','#c4512f'],['#6b7f3a','#e3a72f'],['#7a2f22','#d9822b'],['#2f5a3f','#e3a72f'],['#b5651d','#e8b7a0'],['#5b3a4a','#a8c09a']];
+const CHIPS=[['#e3a72f','#1f3d2b'],['#d9822b','#1f3d2b'],['#a8c09a','#1f3d2b'],['#c4512f','#fbf6e9'],['#6b7f3a','#fbf6e9'],['#7a2f22','#fbf6e9'],['#5b3a4a','#fbf6e9'],['#e8b7a0','#1f3d2b']];
+const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
+const fmt=d=>d?new Date(d+'T12:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'}):'';
+
+function render(){
+  const q=$('q').value.trim().toLowerCase();
+  const list=shows.filter(s=>[s.artist,s.venue,s.city,s.name].join(' ').toLowerCase().includes(q)).sort((a,b)=>b.date.localeCompare(a.date));
+  const uniq=f=>new Set(shows.map(f).filter(Boolean).map(x=>x.toLowerCase())).size;
+  $('stats').innerHTML='';
+  [[shows.length,'shows'],...(groupsOf(shows).length<shows.length?[[groupsOf(shows).length,'unique concerts']]:[]),[uniq(s=>s.artist),'artists'],[uniq(s=>s.venue),'venues'],[uniq(s=>s.city),'cities']].forEach(([n,l])=>{
+    const d=document.createElement('div');d.className='stat';const b=document.createElement('b');b.textContent=n;d.append(b,l);$('stats').append(d)});
+  const g=$('grid');g.innerHTML='';
+  if(!list.length){
+    const e=document.createElement('div');e.className='empty';
+    e.innerHTML='<h2></h2><p class="sub"></p>';
+    e.querySelector('h2').textContent=shows.length?'No matches':'Your wall is empty';
+    e.querySelector('p').textContent=shows.length?'Try a different search.':'Tap “Add a show”, enter an artist and a date, and let autofill do the rest.';
+    g.append(e);return;
+  }
+  list.forEach(s=>{
+    const t=document.createElement('article');t.className='ticket';
+    const p=document.createElement('div');p.className='poster';
+    if(s.poster){p.style.backgroundImage=`url("${s.poster.replace(/"/g,'%22')}")`;p.setAttribute('role','img');p.setAttribute('aria-label',s.artist+' poster')}
+    else{const g=PAL[hue(s.artist)%PAL.length];p.style.background=`linear-gradient(135deg,${g[0]},${g[1]})`;p.textContent=s.artist.trim()[0]?.toUpperCase()||'?'}
+    const st=document.createElement('div');st.className='stub';
+    const dt=document.createElement('span');dt.className='date';dt.textContent=fmt(s.date);{const c=CHIPS[hue(s.artist)%CHIPS.length];dt.style.background=c[0];dt.style.color=c[1]}
+    const h2=document.createElement('h2');h2.textContent=s.artist;
+    st.append(dt,h2);
+    if(s.name){const n=document.createElement('p');n.className='sub';n.textContent=s.name;st.append(n)}
+    const loc=[s.venue,s.city].filter(Boolean).join(', ');
+    if(loc){const v=document.createElement('p');v.className='venue';v.textContent=loc;st.append(v)}
+    if(s.notes){const n=document.createElement('p');n.className='note';n.textContent=s.notes;st.append(n)}
+    const a=document.createElement('div');a.className='acts';
+    if(s.setlistUrl){const l=document.createElement('a');l.href=s.setlistUrl;l.target='_blank';l.rel='noopener';l.className='btn sm';l.textContent='Setlist';a.append(l)}
+    const ed=document.createElement('button');ed.className='btn sm';ed.textContent='Edit';ed.onclick=()=>openDlg(s.id);
+    const del=document.createElement('button');del.className='btn sm';del.textContent='Delete';
+    del.onclick=()=>{if(confirm('Delete '+s.artist+' on '+fmt(s.date)+'?')){shows.forEach(x=>{if(x.repeatOf===s.id){x.repeatOf=s.repeatOf||'';x.updatedAt=Date.now()}});deleted[s.id]=Date.now();shows=shows.filter(x=>x.id!==s.id);persist();render()}};
+    a.append(ed,del);st.append(a);t.append(p,st);g.append(t);
+  });
+}
+
+function rootId(s){const by={};shows.forEach(x=>by[x.id]=x);let x=s,i=0;while(x.repeatOf&&by[x.repeatOf]&&i++<50)x=by[x.repeatOf];return x.id}
+function groupsOf(list){const g={};list.forEach(s=>{const r=rootId(s);(g[r]=g[r]||[]).push(s)});return Object.values(g)}
+function fillRepeat(selfId,cur){
+  const sel=$('repeatOf');sel.innerHTML='';
+  const o0=document.createElement('option');o0.value='';o0.textContent='No, this is a new concert';sel.append(o0);
+  const by={};shows.forEach(x=>by[x.id]=x);
+  const reaches=c=>{let x=c,i=0;while(x&&i++<50){if(x.id===selfId)return true;x=by[x.repeatOf]}return false};
+  shows.filter(x=>x.id!==selfId&&!reaches(x)).sort((a,b)=>b.date.localeCompare(a.date)).forEach(x=>{const o=document.createElement('option');o.value=x.id;o.textContent=`${x.artist}, ${fmt(x.date)}${x.venue?', '+x.venue:''}`;sel.append(o)});
+  sel.value=cur||'';
+}
+function setThumb(url){const t=$('thumb');if(url){t.style.display='block';t.style.backgroundImage=`url("${url.replace(/"/g,'%22')}")`}else t.style.display='none'}
+function openDlg(id){
+  editId=id||null;found={};
+  const s=shows.find(x=>x.id===id)||{};
+  $('dtitle').textContent=id?'Edit show':'Add a show';
+  ['artist','date','name','venue','city','poster','notes','hours','price','platform','cap','videoGB','face','merch','travel','born'].forEach(k=>$(k).value=s[k]||'');
+  found.setlistUrl=s.setlistUrl||'';
+  $('songs').value=(s.songs||[]).join('\n');fillRepeat(id,s.repeatOf);
+  $('upload').value='';$('status').textContent='';setThumb(s.poster);showM($('dlg'));
+}
+
+const CUR='$'; // change to your currency symbol
+const num=id=>{const v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+let netOk=false;
+const jget=async u=>{const r=await fetch(u);netOk=true;if(!r.ok)throw new Error(r.status);return r.json()};
+
+async function fromSetlistFm(artist,date){
+  const proxy=getProxy();if(!proxy)return null;
+  const [y,m,d]=date.split('-');
+  const j=await jget(`${proxy.replace(/\/$/,'')}/?artist=${encodeURIComponent(artist)}&date=${d}-${m}-${y}`);
+  const s=(j.setlist||[])[0];if(!s)return null;
+  return{venue:s.venue?.name,city:[s.venue?.city?.name,s.venue?.city?.country?.name].filter(Boolean).join(', '),name:s.tour?.name,setlistUrl:s.url,songs:(s.sets?.set||[]).flatMap(x=>x.song||[]).map(x=>x.name).filter(Boolean)};
+}
+async function fromMusicBrainz(artist,date){
+  const q=`artist:"${artist.replace(/"/g,'')}" AND date:${date}`;
+  const j=await jget(`https://musicbrainz.org/ws/2/event?query=${encodeURIComponent(q)}&fmt=json&limit=3`);
+  const ev=(j.events||[])[0];if(!ev)return null;
+  const pl=(ev.relations||[]).find(r=>r.place)?.place;
+  let city='';
+  if(pl?.id){try{await sleep(1100);const p=await jget(`https://musicbrainz.org/ws/2/place/${pl.id}?fmt=json`);city=p.area?.name||''}catch(e){}}
+  return{venue:pl?.name,city,name:ev.name};
+}
+const norm=x=>(x||'').toLowerCase().replace(/[^a-z0-9\uac00-\ud7a3\u3040-\u30ff\u4e00-\u9fff]/g,'');
+async function posterFor(artist,date){
+  const yr=+date.slice(0,4),na=norm(artist);
+  for(const c of ['us','kr','jp']){
+    const j=await jget(`https://itunes.apple.com/search?term=${encodeURIComponent(artist)}&entity=album&attribute=artistTerm&limit=30&country=${c}`);
+    const albums=(j.results||[]).filter(a=>a.artworkUrl100&&norm(a.artistName).includes(na));
+    if(albums.length){
+      const before=albums.filter(a=>+a.releaseDate.slice(0,4)<=yr).sort((a,b)=>b.releaseDate.localeCompare(a.releaseDate));
+      return (before[0]||albums[0]).artworkUrl100.replace('100x100bb','600x600bb');
+    }
+  }
+  return '';
+}
+
+async function capacityFor(venue){
+  const q=encodeURIComponent(venue);
+  const j=await jget(`https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${q}&language=en&limit=3&format=json&origin=*`);
+  const ids=(j.search||[]).map(x=>x.id);if(!ids.length)return 0;
+  const e=await jget(`https://www.wikidata.org/w/api.php?action=wbgetentities&ids=${ids.join('|')}&props=claims&format=json&origin=*`);
+  for(const id of ids){const c=e.entities?.[id]?.claims?.P1083?.[0]?.mainsnak?.datavalue?.value?.amount;if(c)return Math.round(Math.abs(+c))}
+  return 0;
+}
+const wd=q=>jget(`https://www.wikidata.org/w/api.php?${q}&format=json&origin=*`);
+const wdDate=c=>{const v=c?.mainsnak?.datavalue?.value;if(!v?.time)return '';const [y,m,d]=v.time.replace(/^\+/,'').slice(0,10).split('-');return v.precision>=11?`${y}-${m}-${d}`:v.precision===10?`${y}-${m}`:y};
+const toks=x=>(x||'').toLowerCase().split(/[^a-z0-9\uac00-\ud7a3\u3040-\u30ff\u4e00-\u9fff]+/).filter(Boolean);
+const sameSet=(a,b)=>{const A=toks(a),B=toks(b);return A.length>0&&A.length===B.length&&A.every(t=>B.includes(t))};
+const nameMatch=(a,b)=>{const A=toks(a),B=toks(b);return A.length>0&&B.length>0&&(A.every(t=>B.includes(t))||B.every(t=>A.includes(t)))};
+const fmtWd=(t,prec)=>{const [y,m,d]=t.replace(/^\+/,'').slice(0,10).split('-');return prec>=11?`${y}-${m}-${d}`:prec===10?`${y}-${m}`:y};
+async function wikidataPerformers(artist){
+  const sr=await wd(`action=wbsearchentities&search=${encodeURIComponent(artist)}&language=en&limit=7`);
+  const ids=(sr.search||[]).map(x=>x.id);if(!ids.length)return null;
+  try{ // groups: current members listed on the group, or members who list the group
+    const q=`SELECT DISTINCT ?g ?m ?mLabel ?dob ?prec WHERE { VALUES ?g { ${ids.map(i=>'wd:'+i).join(' ')} }
+      { ?g p:P527 ?s . ?s ps:P527 ?m . FILTER NOT EXISTS{?s pq:P582 ?e} } UNION { ?m p:P463 ?s2 . ?s2 ps:P463 ?g . FILTER NOT EXISTS{?s2 pq:P582 ?e2} }
+      ?m p:P569 ?ds . ?ds psv:P569 ?dv . ?dv wikibase:timeValue ?dob ; wikibase:timePrecision ?prec .
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } }`;
+    const r=await jget(`https://query.wikidata.org/sparql?format=json&query=${encodeURIComponent(q)}`);
+    const by={};
+    (r.results?.bindings||[]).forEach(x=>{const g=x.g.value.split('/').pop(),nm=x.mLabel?.value||'';(by[g]=by[g]||{})[x.m.value]={name:/^Q\d+$/.test(nm)?'':nm,born:fmtWd(x.dob.value,+x.prec.value)}});
+    let best=null;ids.forEach(g=>{const n=Object.keys(by[g]||{}).length;if(n>=2&&(!best||n>best.n))best={g,n}});
+    if(best){const ms=Object.values(by[best.g]);return{members:ms,total:ms.length}}
+  }catch(e){}
+  const ents=(await wd(`action=wbgetentities&ids=${ids.join('|')}&props=claims&languages=en`)).entities||{};
+  for(const id of ids){const b=wdDate(ents[id]?.claims?.P569?.[0]);if(b)return{members:[{name:'',born:b}],total:1}}
+  return null;
+}
+async function bornFor(artist){
+  try{
+    const w=await wikidataPerformers(artist);
+    if(w)return{born:w.members.map(m=>(m.name?m.name+' ':'')+m.born).join(', '),src:'Wikidata',n:w.members.length,total:w.total};
+  }catch(e){}
+  await sleep(1100);
+  const j=await jget(`https://musicbrainz.org/ws/2/artist?query=${encodeURIComponent('artist:"'+artist.replace(/"/g,'')+'"')}&fmt=json&limit=3`);
+  const a=(j.artists||[]).find(x=>x.name.toLowerCase()===artist.toLowerCase());
+  if(!a)return{};
+  if(a.type==='Person'&&a['life-span']?.begin)return{born:a['life-span'].begin,src:'MusicBrainz',n:1,total:1};
+  return{group:a.type==='Group'};
+}
+async function autofill(){
+  const artist=$('artist').value.trim(),date=$('date').value;
+  if(!artist||!date){$('status').textContent='Enter an artist and a date first.';return}
+  const btn=$('auto');btn.disabled=true;netOk=false;$('status').textContent='Searching…';
+  const got=[];let info=null;
+  try{info=await fromSetlistFm(artist,date);if(info)got.push('setlist.fm')}catch(e){}
+  if(!info?.venue){try{const m=await fromMusicBrainz(artist,date);if(m){info={...m,...(info||{})};if(m.venue)got.push('MusicBrainz')}}catch(e){}}
+  if(info){
+    if(info.venue&&!$('venue').value)$('venue').value=info.venue;
+    if(info.city&&!$('city').value)$('city').value=info.city;
+    if(info.name&&!$('name').value)$('name').value=info.name;
+    if(info.setlistUrl)found.setlistUrl=info.setlistUrl;
+    if(info.songs?.length&&!$('songs').value.trim()){$('songs').value=info.songs.join('\n');got.push('setlist songs')}
+  }
+  let note='';
+  const bornParts=$('born').value.split(/[;,\n]+/).map(x=>x.trim()).filter(Boolean);
+  if($('born').value.trim()&&bornParts.some(x=>!/\d{4}/.test(x))){
+    try{
+      const w=await wikidataPerformers(artist);
+      if(w){let miss=0;const out=bornParts.map(x=>{if(/\d{4}/.test(x))return x;const m=w.members.find(m=>m.name&&sameSet(m.name,x))||w.members.find(m=>m.name&&nameMatch(m.name,x));if(m)return x+' '+m.born;miss++;return x});
+        $('born').value=out.join(', ');got.push('Wikidata birth dates');if(miss)note+=` Couldn't match ${miss} name${miss>1?'s':''}, so type their birth year by hand.`}
+      else note+=' No member birth dates were found for that group.';
+    }catch(e){}
+  }
+  if(!$('born').value){
+    const prev=shows.find(x=>x.born&&x.artist.trim().toLowerCase()===artist.toLowerCase());
+    if(prev){$('born').value=prev.born;got.push('your earlier show')}
+    else{try{const b=await bornFor(artist);if(b.born){$('born').value=b.born;got.push(b.src+' birth dates');if(b.total>b.n)note+=` Only ${b.n} of ${b.total} listed members had birth dates.`;if(b.n>1)note+=' Remove anyone who did not perform.'}else if(b.group)note=" This looks like a group, so add each member's birth year or date under Extra details."}catch(e){}}
+  }
+  if(!$('repeatOf').value&&$('venue').value){
+    const d=new Date(date+'T12:00:00'),v=$('venue').value.trim().toLowerCase();
+    const m=shows.filter(x=>x.id!==editId&&x.artist.trim().toLowerCase()===artist.toLowerCase()&&(x.venue||'').trim().toLowerCase()===v&&Math.abs(new Date(x.date+'T12:00:00')-d)<14*864e5).sort((a,b)=>a.date.localeCompare(b.date))[0];
+    if(m){$('repeatOf').value=m.id;note+=' Marked as a repeat of '+fmt(m.date)+'.'}
+  }
+  if($('venue').value&&!$('cap').value){try{const c=await capacityFor($('venue').value);if(c){$('cap').value=c;got.push('Wikidata capacity')}}catch(e){}}
+  try{const p=await posterFor(artist,date);if(p&&!$('poster').value){$('poster').value=p;setThumb(p);got.push('iTunes artwork')}}catch(e){}
+  $('status').textContent=got.length?'Filled from '+got.join(', ')+'.'+note+' Check the details, then save.':(netOk?'Nothing found for that artist and date. Try the Romanized name (for example Stray Kids rather than the Korean name). For K-pop tours, setlist.fm under Settings has the best coverage. You can also type everything in by hand.':"Couldn't reach the lookup services. The test link blocks them, so use the GitHub Pages version for autofill. You can still type everything in by hand.");
+  if(['born','cap','songs','repeatOf'].some(k=>$(k).value))$('extra').open=true;
+  btn.disabled=false;
+}
+
+function shrink(file){
+  return new Promise((res,rej)=>{
+    const img=new Image(),u=URL.createObjectURL(file);
+    img.onload=()=>{const s=Math.min(1,600/Math.max(img.width,img.height)),c=document.createElement('canvas');
+      c.width=img.width*s;c.height=img.height*s;c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.8))};
+    img.onerror=rej;img.src=u;
+  });
+}
+
+$('add').onclick=()=>openDlg();
+$('cancel').onclick=()=>$('dlg').close();
+$('auto').onclick=autofill;
+$('q').oninput=render;
+$('poster').oninput=e=>setThumb(e.target.value);
+$('upload').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=await shrink(f);$('poster').value=d;setThumb(d)}catch(x){$('status').textContent='Could not read that image.'}};
+$('save').onclick=()=>{
+  const artist=$('artist').value.trim(),date=$('date').value;
+  if(!artist||!date){$('status').textContent='Artist and date are required.';return}
+  const rec={updatedAt:Date.now(),id:editId||(String(Date.now())+Math.random().toString(36).slice(2,5)),artist,date,name:$('name').value.trim(),venue:$('venue').value.trim(),city:$('city').value.trim(),poster:$('poster').value.trim(),notes:$('notes').value.trim(),hours:num('hours'),price:num('price'),face:num('face'),travel:num('travel'),born:$('born').value.trim(),repeatOf:$('repeatOf').value,songs:$('songs').value.split('\n').map(x=>x.trim()).filter(Boolean),merch:num('merch'),platform:$('platform').value.trim(),cap:num('cap'),videoGB:num('videoGB'),setlistUrl:found.setlistUrl||''};
+  shows=editId?shows.map(s=>s.id===editId?rec:s):[...shows,rec];
+  persist();render();$('dlg').close();
+};
+$('export').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(shows,null,2)],{type:'application/json'}));a.download='concerts.json';a.click()};
+$('import').onclick=()=>$('file').click();
+$('file').onchange=async e=>{
+  try{const arr=JSON.parse(await e.target.files[0].text());if(!Array.isArray(arr))throw 0;
+    const ids=new Set(shows.map(s=>s.id));arr.forEach(s=>{if(s.artist&&s.date&&!ids.has(s.id))shows.push({...s,id:s.id||String(Date.now())+Math.random().toString(36).slice(2,5),updatedAt:s.updatedAt||Date.now()})});
+    persist();render()}catch(x){alert('That file is not a valid concerts.json.')}
+  e.target.value='';
+};
+$('cfg').onclick=()=>{$('proxy').value=getProxy();$('uname').value=userName;$('surl').value=syncCfg.url||'';$('skey').value=syncCfg.key||'';$('semail').value=syncCfg.email||'';$('spass').value='';setSyncStatus(signedIn()?'Signed in as '+syncCfg.email:'Not signed in.');showM($('cdlg'))};
+$('ccancel').onclick=()=>$('cdlg').close();
+$('csave').onclick=()=>{
+  try{localStorage.setItem(PKEY,$('proxy').value.trim())}catch(e){}
+  readCfg();const nm=$('uname').value.trim();
+  if(nm!==userName){userName=nm;nameAt=Date.now();persist()}
+  $('cdlg').close();
+};
+
+/* ---------- Sync (Supabase) ---------- */
+let syncTimer=null,syncing=false,again=false;
+const saveCfg=()=>{try{localStorage.setItem('concerts.sync',JSON.stringify(syncCfg))}catch(e){}};
+const signedIn=()=>!!(syncCfg.url&&syncCfg.key&&syncCfg.session);
+function setSyncStatus(t){$('syncstat').textContent=t}
+function readCfg(){syncCfg.url=$('surl').value.trim().replace(/\/$/,'');syncCfg.key=$('skey').value.trim();syncCfg.email=$('semail').value.trim();saveCfg()}
+function syncSoon(){if(!signedIn())return;clearTimeout(syncTimer);syncTimer=setTimeout(syncNow,1500)}
+async function authCall(path,body){
+  const r=await fetch(`${syncCfg.url}/auth/v1/${path}`,{method:'POST',headers:{apikey:syncCfg.key,'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(j.msg||j.error_description||j.message||('Error '+r.status));
+  return j;
+}
+function takeSession(j){
+  if(!j.access_token)return false;
+  syncCfg.session={access:j.access_token,refresh:j.refresh_token,exp:Date.now()+(j.expires_in||3600)*1000-60000,uid:j.user?.id||syncCfg.session?.uid};
+  saveCfg();return true;
+}
+async function getSession(){
+  if(Date.now()>syncCfg.session.exp)takeSession(await authCall('token?grant_type=refresh_token',{refresh_token:syncCfg.session.refresh}));
+  return syncCfg.session;
+}
+function mergeData(r){
+  const del={...(r.deleted||{})};
+  Object.entries(deleted).forEach(([id,t])=>{del[id]=Math.max(del[id]||0,t)});
+  const map={};
+  [...shows,...(r.shows||[])].forEach(x=>{const c=map[x.id];if(!c||(x.updatedAt||0)>(c.updatedAt||0))map[x.id]=x});
+  Object.keys(del).forEach(id=>{if(map[id]&&(map[id].updatedAt||0)<=del[id])delete map[id]});
+  shows=Object.values(map);deleted=del;
+  if((r.nameAt||0)>nameAt){userName=r.name||'';nameAt=r.nameAt}
+}
+async function syncNow(){
+  if(!signedIn())return;
+  if(syncing){again=true;return}
+  syncing=true;setSyncStatus('Syncing…');
+  try{
+    const ss=await getSession(),h={apikey:syncCfg.key,Authorization:'Bearer '+ss.access};
+    const r=await fetch(`${syncCfg.url}/rest/v1/shows_data?select=data&limit=1`,{headers:h});
+    if(!r.ok)throw new Error('Could not read your data ('+r.status+'). Did you run supabase-setup.sql?');
+    const rows=await r.json();
+    if(rows[0]?.data)mergeData(rows[0].data);
+    saveLocal();render();
+    const w=await fetch(`${syncCfg.url}/rest/v1/shows_data?on_conflict=user_id`,{method:'POST',headers:{...h,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({user_id:ss.uid,data:{v:1,shows,deleted,name:userName,nameAt},updated_at:new Date().toISOString()})});
+    if(!w.ok)throw new Error('Could not save ('+w.status+')');
+    setSyncStatus('Synced at '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}));
+  }catch(e){setSyncStatus('Sync problem: '+e.message)}
+  syncing=false;
+  if(again){again=false;syncSoon()}
+}
+async function doAuth(signup){
+  readCfg();const pw=$('spass').value;
+  if(!syncCfg.url||!syncCfg.key||!syncCfg.email||!pw){setSyncStatus('Fill in the project URL, key, email and password.');return}
+  try{
+    setSyncStatus(signup?'Creating account…':'Signing in…');
+    const j=await authCall(signup?'signup':'token?grant_type=password',{email:syncCfg.email,password:pw});
+    if(takeSession(j))await syncNow();else setSyncStatus('Account created. Confirm it from the email Supabase sent, then tap Sign in.');
+  }catch(e){setSyncStatus(e.message)}
+  $('spass').value='';
+}
+$('sin').onclick=()=>doAuth(false);
+$('sup').onclick=()=>doAuth(true);
+$('snow').onclick=()=>{if(signedIn())syncNow();else setSyncStatus('Sign in first.')};
+$('sout').onclick=()=>{syncCfg.session=null;saveCfg();setSyncStatus('Signed out. Your shows stay on this device.')};
+
+/* ---------- Poster wall ---------- */
+const WPAL=PAL;
+function tileEl(s,i,cap){
+  const t=document.createElement('div');t.className='tile';t.style.setProperty('--r',[-3,2,-1.5,3][i%4]+'deg');
+  const p=document.createElement('div');p.className='tp';
+  if(s.poster){p.style.backgroundImage=`url("${s.poster.replace(/"/g,'%22')}")`;p.setAttribute('role','img');p.setAttribute('aria-label',s.artist+' poster')}
+  else{const g=WPAL[hue(s.artist)%WPAL.length];p.style.background=`linear-gradient(135deg,${g[0]},${g[1]})`;p.textContent=s.artist.trim()[0]?.toUpperCase()||'?'}
+  t.append(p);
+  if(cap){const c=document.createElement('div');c.className='cap';const b=document.createElement('b');b.textContent=s.artist;const d=document.createElement('span');d.textContent=fmt(s.date);c.append(b,d);t.append(c)}
+  else t.title=s.artist;
+  return t;
+}
+function collage(list){
+  const L=[...list].sort((a,b)=>a.date.localeCompare(b.date)),max=16,over=L.length>max?L.length-(max-1):0;
+  const shown=over?L.slice(-(max-1)):L,cols=L.length<=4?2:L.length<=9?3:4;
+  const g=document.createElement('div');g.className='collage';g.style.gridTemplateColumns=`repeat(${cols},1fr)`;
+  shown.forEach((s,i)=>g.append(tileEl(s,i)));
+  if(over){const m=document.createElement('div');m.className='tile more';m.textContent='+'+over;g.append(m)}
+  return g;
+}
+function openWall(){
+  $('wtitle').textContent='\u2726 '+(userName?userName+"'s":'My')+' concert wall';
+  const box=$('wallbody'),st=$('ostats');box.innerHTML='';st.innerHTML='';
+  if(!shows.length){const p=document.createElement('p');p.textContent='Nothing here yet. Add a show and your first poster lands on the wall.';box.append(p);showM($('odlg'));return}
+  const L=[...shows].sort((a,b)=>a.date.localeCompare(b.date));
+  const hrs=Math.round(L.reduce((a,x)=>a+(x.hours>0?x.hours:2.5),0));
+  const cnt=f=>new Set(L.map(f).filter(Boolean).map(x=>x.toLowerCase())).size;
+  [[L.length,'shows'],[groupsOf(L).length,'unique'],[cnt(x=>x.artist),'artists'],[cnt(x=>x.city),'cities'],[hrs,'hours']].forEach(([n,l])=>{const d=document.createElement('div');d.className='stat';const b=document.createElement('b');b.textContent=n;d.append(b,l);st.append(d)});
+  let i=0;
+  [...new Set(L.map(x=>x.date.slice(0,4)))].reverse().forEach(y=>{
+    const h=document.createElement('div');h.className='yr';h.textContent=y;box.append(h);
+    const g=document.createElement('div');g.className='wall';
+    L.filter(x=>x.date.startsWith(y)).forEach(x=>g.append(tileEl(x,i++,true)));box.append(g);
+  });
+  showM($('odlg'));
+}
+$('wall').onclick=openWall;$('oclose').onclick=()=>$('odlg').close();
+
+/* ---------- Wrapped ---------- */
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+function topOf(arr){const m={},n={};arr.filter(Boolean).forEach(k=>{const l=k.trim().toLowerCase();m[l]=(m[l]||0)+1;n[l]=n[l]||k.trim()});const e=Object.entries(m).sort((a,b)=>b[1]-a[1])[0];return e?[n[e[0]],e[1],Object.keys(m).length]:['',0,0]}
+function fillYears(){
+  const sel=$('wyear'),cur=sel.value,ys=[...new Set(shows.map(s=>s.date.slice(0,4)))].sort().reverse();
+  sel.innerHTML='';[['all','All time'],...ys.map(y=>[y,y])].forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;sel.append(o)});
+  if([...sel.options].some(o=>o.value===cur))sel.value=cur;
+}
+function buildSlides(list,label){
+  const n=list.length,logged=list.filter(s=>s.hours>0),hours=Math.round(list.reduce((a,s)=>a+(s.hours>0?s.hours:2.5),0));
+  const lg=logged.reduce((a,b)=>!a||b.hours>a.hours?b:a,null);
+  const [ta,tac,uniqA]=topOf(list.map(s=>s.artist)),[tv,tvc]=topOf(list.map(s=>s.venue)),[tc,,cities]=topOf(list.map(s=>s.city));
+  const [mo,moc]=topOf(list.map(s=>MONTHS[+s.date.slice(5,7)-1]));
+  const [dy]=topOf(list.map(s=>DAYS[new Date(s.date+'T12:00:00').getDay()]));
+  const wkend=Math.round(100*list.filter(s=>{const d=new Date(s.date+'T12:00:00').getDay();return d===5||d===6}).length/n);
+  let pt,pd;
+  if(n<3){pt='The Newcomer';pd='Just getting warmed up. The best is still ahead.'}
+  else if(tac>=3&&tac/n>=.3){pt='The Loyalist';pd='When you love a band, you show up. Again and again.'}
+  else if(cities>=5){pt='The Globetrotter';pd='Passport stamped, earplugs packed.'}
+  else if(n>=5&&uniqA/n>=.9){pt='The Explorer';pd='Barely a repeat. You collect artists like trading cards.'}
+  else if(wkend<=40){pt='The Weeknight Warrior';pd='Work tomorrow? Never heard of it.'}
+  else{pt='The Regular';pd='Steady, dependable, always near the front.'}
+  const S=[
+   {bg:'#c4512f',fg:'#f8f1de',k:'Your concert wrapped'+(userName?' \u00b7 '+label:''),big:userName?'Hey '+userName+'!':label,line:`${n} show${n>1?'s':''} to look back on. Ready?`},
+   {bg:'#e3a72f',fg:'#1f3d2b',k:'Time spent',big:hours+' hours',line:`of live music, roughly ${n*20} songs.`+(lg?` Longest night: ${lg.artist}, ${lg.hours} hours.`:'')+(logged.length<n?' Shows without hours count as 2.5.':'')},
+   {bg:'#a8c09a',fg:'#1f3d2b',k:'Most seen artist',big:ta,line:tac>1?`You caught them ${tac} times. That's commitment.`:'Only once each so far. Every show was a one-night stand.'}
+  ];
+  if(tv)S.push({bg:'#2f5a3f',fg:'#f8f1de',k:'Favorite venue',big:tv,line:tvc>1?`${tvc} visits. Basically your second living room.`:'Every venue was new to you. Bold.'});
+  if(cities)S.push({bg:'#d9822b',fg:'#1f3d2b',k:'Where you roamed',big:cities+(cities>1?' cities':' city'),line:cities>1?`${tc} led the pack.`:`All shows in ${tc}. Local legend.`});
+  S.push({bg:'#1f3d2b',fg:'#e3a72f',k:'Gig season',big:mo,line:`${moc} show${moc>1?'s':''} landed here. Your usual night out is ${dy}, and ${wkend}% of your shows fell on a Friday or Saturday.`});
+  const extra=[];
+  const grp=groupsOf(list),uq=grp.length,mr=grp.reduce((a,g)=>g.length>a.length?g:a,[]);
+  S.splice(1,0,{bg:'#5b3a4a',fg:'#f8f1de',k:'Unique concerts',big:uq+(uq===1?' concert':' concerts'),line:n>uq?`${n} shows in total, so ${n-uq} ${n-uq===1?'was an':'were'} encore visit${n-uq===1?'':'s'} to a concert you'd already seen. Most repeated: ${mr[0].artist}, ${mr.length} nights.`:'No repeat nights. Every show was a brand new one.'});
+  extra.push('Unique concerts: '+uq+' of '+n+' shows');
+  const mc={};list.forEach(s=>{const k=s.date.slice(0,7);mc[k]=(mc[k]||0)+1});
+  const [bk,bc]=Object.entries(mc).sort((a,b)=>b[1]-a[1]||b[0].localeCompare(a[0]))[0];
+  const dts=list.map(s=>new Date(s.date+'T12:00:00')).sort((a,b)=>a-b);let bw=0,bws=null;
+  for(let i=0;i<dts.length;i++){let c=0;for(let j=i;j<dts.length&&(dts[j]-dts[i])/864e5<7;j++)c++;if(c>bw){bw=c;bws=dts[i]}}
+  S.push({bg:'#7a2f22',fg:'#f8f1de',k:'Biggest month ever',big:MONTHS[+bk.slice(5)-1]+' '+bk.slice(0,4),line:`${bc} show${bc>1?'s':''} in one month. ${bc>=4?'Your calendar was on fire.':bc>=2?'A busy month for the ears.':'One a month is a lovely pace.'}`+(bw>1?` Busiest week: ${bw} shows, starting ${bws.toLocaleDateString(undefined,{month:'short',day:'numeric'})}.`:'')});
+  extra.push('Biggest month: '+MONTHS[+bk.slice(5)-1]+' '+bk.slice(0,4)+' ('+bc+')');
+  const SEAS={Winter:'Cold nights, warm venues.',Spring:'Fresh air, fresh setlists.',Summer:'Festival energy and sunburnt ears.',Autumn:'Cozy sweaters, loud guitars.'};
+  const seasonOf=d=>{const m=+d.slice(5,7);return m===12||m<=2?'Winter':m<=5?'Spring':m<=8?'Summer':'Autumn'};
+  const [se,sec]=topOf(list.map(s=>seasonOf(s.date)));
+  S.push({bg:'#2f5a3f',fg:'#f8f1de',k:'Favorite season',big:se,line:`${sec} show${sec>1?'s':''}. ${SEAS[se]} (Seasons assume the northern hemisphere.)`});
+  const ageAt=(b,d)=>{if(!b)return null;const nb=b.length===4?b+'-07-01':b.length===7?b+'-15':b,x=new Date(nb+'T12:00:00');if(isNaN(x))return null;const a=(new Date(d+'T12:00:00')-x)/31557600000;return a>0&&a<120?a:null};
+  const parseBorn=str=>(str||'').split(/[;,\n]+/).map(x=>x.trim()).filter(Boolean).map(x=>{const m=x.match(/\d{4}(?:-\d{2}(?:-\d{2})?)?/);return m?{name:x.slice(0,m.index).trim(),b:m[0]}:null}).filter(Boolean);
+  const apps=[];
+  list.forEach(s=>parseBorn(s.born).forEach(m=>{const a=ageAt(m.b,s.date);if(a!==null)apps.push({s,a,who:m.name||s.artist,key:(s.artist+'|'+(m.name||m.b)).toLowerCase()})}));
+  if(apps.length){
+    const avgA=apps.reduce((t,x)=>t+x.a,0)/apps.length,old=apps.reduce((a,b)=>b.a>a.a?b:a),young=apps.reduce((a,b)=>b.a<a.a?b:a);
+    const people=new Set(apps.map(x=>x.key)).size,lab=x=>x.who.toLowerCase()===x.s.artist.toLowerCase()?x.s.artist:`${x.who} of ${x.s.artist}`;
+    const vibe=avgA<25?'Fresh faces. You keep up with the kids.':avgA<40?'Prime-time performers.':avgA<55?'Seasoned pros.':'Living legends. Respect.';
+    S.push({bg:'#9a4a22',fg:'#f8f1de',k:'Average age of performers',big:Math.round(avgA)+' years old',line:`${vibe} Every member on stage counted.`+(people>1?` Oldest: ${lab(old)}, ${Math.round(old.a)}. Youngest: ${lab(young)}, ${Math.round(young.a)}. ${people} different performers seen live.`:'')});
+    extra.push('Average performer age: '+Math.round(avgA)+' ('+people+' performers)');
+  }
+  const sc={};let heard=0;
+  list.forEach(s=>{const seen=new Set();(s.songs||[]).forEach(t=>{const k=(s.artist.trim()+'|'+t.trim()).toLowerCase();if(seen.has(k))return;seen.add(k);heard++;(sc[k]=sc[k]||{t:t.trim(),a:s.artist.trim(),c:0}).c++})});
+  const sl=Object.values(sc).sort((a,b)=>b.c-a.c||a.t.localeCompare(b.t));
+  if(sl.length){
+    const rp=sl.filter(x=>x.c>1).slice(0,4).map(x=>`${x.t} (${x.a}): ${x.c} times`);
+    const lines=[`${heard} songs heard live, ${sl.length} different ones.`,...(rp.length?rp:['No song has been repeated yet. Pure variety.'])];
+    S.push({bg:'#e3a72f',fg:'#1f3d2b',k:'Songs you heard live',list:lines,copy:'Songs heard live: '+lines.join(' ')});
+    if(rp.length)extra.push('Most heard song: '+rp[0]);
+  }
+  const caps=list.filter(s=>s.cap>0);
+  if(caps.length){
+    const avg=Math.round(caps.reduce((a,s)=>a+s.cap,0)/caps.length),big=caps.reduce((a,b)=>b.cap>a.cap?b:a),sm=caps.reduce((a,b)=>b.cap<a.cap?b:a);
+    const kind=avg<1500?'Club kid. You like to see the sweat.':avg<8000?'Theater crowd. Great sound, decent view.':'Arena regular. Bring binoculars.';
+    S.push({bg:'#d9822b',fg:'#1f3d2b',k:'Average venue size',big:avg.toLocaleString()+' people',line:`${kind} Biggest: ${big.venue||big.artist} (${big.cap.toLocaleString()}). Coziest: ${sm.venue||sm.artist} (${sm.cap.toLocaleString()}).`});
+    extra.push('Average venue size: '+avg.toLocaleString());
+  }
+  const trav=list.filter(s=>s.travel>0);
+  if(trav.length){
+    const fmin=m=>m>=60?`${Math.floor(m/60)}h ${Math.round(m%60)}m`:Math.round(m)+' min';
+    const tot=trav.reduce((a,s)=>a+s.travel,0),avg=tot/trav.length,rt=tot*2/60;
+    const th=trav.reduce((a,s)=>a+(s.hours>0?s.hours:2.5),0),far=trav.reduce((a,b)=>b.travel>a.travel?b:a),near=trav.reduce((a,b)=>b.travel<a.travel?b:a);
+    const vibe=avg<20?'Practically next door.':avg<60?'A reasonable commute for the cause.':avg<180?'Dedicated. The playlist did a lot of work.':'Road warrior. Snacks were essential.';
+    const parts=[`${vibe} That's ${rt.toFixed(1)} hours on the road round trip, or ${(rt/th).toFixed(1)} hours of travel for every hour of music.`];
+    if(trav.length>1)parts.push(`Longest trek: ${far.artist}, ${fmin(far.travel)} each way. Shortest: ${near.artist}, ${fmin(near.travel)}.`);
+    S.push({bg:'#9a4a22',fg:'#f8f1de',k:'Average trip to the venue',big:fmin(avg),line:parts.join(' ')});
+    extra.push('Average travel: '+fmin(avg)+', '+rt.toFixed(1)+' hours on the road');
+  }
+  const [tp,tpc]=topOf(list.map(s=>s.platform));
+  if(tp){S.push({bg:'#a8c09a',fg:'#1f3d2b',k:'Ticket platform',big:tp,line:`${tpc} ticket${tpc>1?'s':''} bought there. Hopefully you dodged the fees.`});extra.push('Ticket platform: '+tp)}
+  const priced=list.filter(s=>s.price>0),merch=list.reduce((a,s)=>a+(s.merch||0),0);
+  const tix=priced.reduce((a,s)=>a+s.price,0),spent=tix+merch,fm=x=>CUR+Math.round(x).toLocaleString();
+  const spendShows=list.filter(s=>s.price>0||s.merch>0);
+  if(spent>0){
+    const phr=spendShows.reduce((a,s)=>a+(s.hours>0?s.hours:2.5),0),pr=priced.reduce((a,b)=>!a||b.price>a.price?b:a,null);
+    S.push({bg:'#c4512f',fg:'#f8f1de',k:'Total spent',big:fm(spent),line:`Tickets ${fm(tix)}`+(merch?`, merch ${fm(merch)}`:'')+`. About ${CUR}${Math.round(spent/phr)} per hour of music.`+(pr?` Priciest ticket: ${pr.artist} at ${CUR}${pr.price}.`:'')});
+    extra.push('Total spent: '+fm(spent));
+  }
+  const both=list.filter(s=>s.price>0&&s.face>0);let net=0;
+  const money=x=>CUR+(Math.round(Math.abs(x)*100)/100).toLocaleString();
+  if(both.length){
+    net=both.reduce((a,s)=>a+(s.face-s.price),0);
+    const below=both.filter(s=>s.price<s.face).length,above=both.filter(s=>s.price>s.face).length;
+    const d=s=>s.face-s.price,best=both.reduce((a,b)=>d(b)>d(a)?b:a),worst=both.reduce((a,b)=>d(b)<d(a)?b:a);
+    const parts=[`${below} ticket${below===1?'':'s'} below face value, ${above} above.`];
+    if(d(best)>0)parts.push(`Best steal: ${best.artist}, saved ${money(d(best))}.`);
+    if(d(worst)<0)parts.push(`Biggest splurge: ${worst.artist}, paid ${money(d(worst))} extra.`);
+    S.push({bg:net>=0?'#a8c09a':'#d9822b',fg:'#1f3d2b',k:'Savings',big:money(net)+(net>=0?' saved':' over face'),line:parts.join(' ')});
+    extra.push('Savings: '+(net>=0?'':'-')+money(net));
+  }
+  const gb=list.reduce((a,s)=>a+(s.videoGB||0),0);
+  if(gb>0){S.push({bg:'#1f3d2b',fg:'#e3a72f',k:'Phone storage eaten',big:gb.toFixed(1)+' GB',line:`of concert videos, roughly ${(gb/10).toFixed(1)} hours of 4K footage. Time to back up your camera roll.`});extra.push('Concert videos: '+gb.toFixed(1)+' GB')}
+  const ds=list.map(s=>new Date(s.date+'T12:00:00')).sort((a,b)=>a-b);
+  if(ds.length>1){
+    const gaps=[];for(let i=1;i<ds.length;i++)gaps.push([Math.round((ds[i]-ds[i-1])/864e5),ds[i-1],ds[i]]);
+    const avg=Math.round(gaps.reduce((a,g)=>a+g[0],0)/gaps.length),lng=gaps.reduce((a,g)=>g[0]>a[0]?g:a);
+    const fd=d=>d.toLocaleDateString(undefined,{month:'short',year:'numeric'});
+    S.push({bg:'#6b7f3a',fg:'#f8f1de',k:'Concert rhythm',big:'Every '+avg+(avg===1?' day':' days'),line:`That's your average gap between shows. Longest drought: ${lng[0]} days, ${fd(lng[1])} to ${fd(lng[2])}. We don't talk about it.`});
+  }
+  const gm=[];
+  if(spent>0)gm.push(`Cost per song: about ${CUR}${(spent/(spendShows.length*20)).toFixed(2)}. Practically free.`);
+  if(net>0)gm.push(`You saved ${money(net)}, so that money is already earned. Time to book the next one.`);
+  if(net<0)gm.push(`You paid ${money(net)} over face, but split across every time you retell the story, it's nothing.`);
+  if(merch>0)gm.push(`Merch isn't spending, it's wardrobe. ${CUR}${Math.round(merch/n)} per show is just cost per wear.`);
+  if(gb>0&&spent>0)gm.push(`Memories cost ${CUR}${(spent/gb).toFixed(2)} per GB. Worth every byte.`);
+  if(trav.length)gm.push("Travel time doesn't count when the car singalong is half the show.");
+  gm.push(`${(hours/24).toFixed(1)} full days of pure happiness. Priceless.`);
+  if(gm.length>1)S.push({bg:'#e3a72f',fg:'#1f3d2b',k:'Girl math, verified',list:gm.slice(0,5),copy:'Girl math: '+gm.join(' ')});
+  extra.unshift('Favorite season: '+se);
+  S.push({bg:'#e3a72f',fg:'#1f3d2b',k:'Your concert personality',big:pt,line:pd});
+  S.push({bg:'#1f3d2b',fg:'#f8f1de',k:'All '+n+' show'+(n>1?'s':'')+', one wall',el:()=>collage(list)});
+  const recap=[`${n} shows`,`${hours} hours of live music`,`Top artist: ${ta} (${tac}x)`,tv&&`Top venue: ${tv}`,cities&&`${cities} cities`,`Personality: ${pt}`,...extra].filter(Boolean);
+  S.push({bg:'#c4512f',fg:'#f8f1de',k:label+' recap',list:recap,copy:`${userName?userName+"'s":'My'} concert wrapped (${label}): `+recap.join('; ')});
+  return S;
+}
+let slides=[],si=0;
+function showSlide(){
+  const s=slides[si],el=$('slide');el.innerHTML='';
+  const d=document.createElement('div');d.className='slide';d.style.background=s.bg;d.style.color=s.fg;
+  const k=document.createElement('p');k.className='kick';k.textContent=s.k;d.append(k);
+  if(s.list){const u=document.createElement('ul');s.list.forEach(t=>{const li=document.createElement('li');li.textContent=t;u.append(li)});d.append(u);
+    const b=document.createElement('button');b.className='btn sm';b.style.cssText='margin-top:18px;align-self:flex-start;color:#1f3d2b;background:#f8f1de';b.textContent='Copy summary';
+    b.onclick=async e=>{e.stopPropagation();try{await navigator.clipboard.writeText(s.copy);b.textContent='Copied'}catch(x){b.textContent='Copy failed'}};d.append(b)}
+  else if(s.el)d.append(s.el());
+  else{const b=document.createElement('div');b.className='big';b.textContent=s.big;d.append(b);const l=document.createElement('p');l.className='line';l.textContent=s.line;d.append(l)}
+  d.onclick=e=>{if(e.target.closest('button'))return;(e.clientX<window.innerWidth/2&&e.clientX<d.getBoundingClientRect().left+d.offsetWidth/3)?go(-1):go(1)};
+  el.append(d);
+  $('prog').style.color=s.fg;$('prog').innerHTML=slides.map((_,i)=>`<i class="${i<=si?'on':''}"></i>`).join('');
+  $('wclose').style.cssText='color:#1f3d2b;background:#f8f1de';
+  $('wprev').disabled=si===0;$('wnext').textContent=si===slides.length-1?'Done':'Next';
+}
+function go(dir){const n=si+dir;if(n<0)return;if(n>=slides.length){$('wdlg').close();return}si=n;showSlide()}
+$('wrap').onclick=()=>{
+  const y=$('wyear').value,list=y==='all'?shows:shows.filter(s=>s.date.startsWith(y));
+  if(!list.length){alert('Add a few shows first, then come back for your wrapped.');return}
+  slides=buildSlides(list,y==='all'?'All time':y);si=0;showSlide();showM($('wdlg'));
+};
+$('wnext').onclick=()=>go(1);$('wprev').onclick=()=>go(-1);$('wclose').onclick=()=>$('wdlg').close();
+$('wdlg').addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
+const _render=render;render=function(){_render();fillYears()};
+const menu=$('menu'),mbtn=$('menuBtn');
+function closeMenu(){menu.hidden=true;mbtn.setAttribute('aria-expanded','false')}
+mbtn.onclick=e=>{e.stopPropagation();const open=menu.hidden;menu.hidden=!open;mbtn.setAttribute('aria-expanded',String(open))};
+menu.addEventListener('click',e=>{if(e.target.closest('.mi'))closeMenu()});
+document.addEventListener('click',e=>{if(!menu.hidden&&!e.target.closest('.menuwrap'))closeMenu()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){closeMenu();mbtn.focus()}});
+render();
+syncNow();document.addEventListener('visibilitychange',()=>{if(!document.hidden)syncNow()});
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
+</body>
+</html>
