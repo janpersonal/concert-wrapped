@@ -574,6 +574,57 @@ function showCands(list){
   const c=document.createElement('span');c.className='cap2';c.textContent='Tap one to use it';box.append(c);
   list.forEach(u=>{const b=document.createElement('button');b.type='button';b.className='cand';b.style.backgroundImage=`url("${u.replace(/"/g,'%22')}")`;b.setAttribute('aria-label','Use this poster');b.onclick=()=>{$('poster').value=u;setThumb(u)};box.append(b)});
 }
+/* ---- Wikipedia tour dates: tour name, venue, city, country (no key needed) ---- */
+const MON={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+const p2=n=>String(n).padStart(2,'0');
+function parseDates(txt){
+  const t=(txt||'').replace(/\[[^\]]*\]/g,'').replace(/\u00a0/g,' '),out=[];let m;
+  const iso=/(\d{4})-(\d{2})-(\d{2})/g;while((m=iso.exec(t)))out.push(m[0]);
+  const rng=/([A-Za-z]{3,9})\.?\s+(\d{1,2})\s*[\u2013\u2014-]\s*(\d{1,2}),?\s*(\d{4})/g;
+  while((m=rng.exec(t))){const mo=MON[m[1].slice(0,3).toLowerCase()];if(mo)for(let d=+m[2];d<=+m[3]&&d<=31;d++)out.push(`${m[4]}-${p2(mo)}-${p2(d)}`)}
+  const dmy=/(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]{3,9})\.?,?\s*(\d{4})/g;
+  while((m=dmy.exec(t))){const mo=MON[m[2].slice(0,3).toLowerCase()];if(mo)out.push(`${m[3]}-${p2(mo)}-${p2(m[1])}`)}
+  const mdy=/([A-Za-z]{3,9})\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s*(\d{4})/g;
+  while((m=mdy.exec(t))){const mo=MON[m[1].slice(0,3).toLowerCase()];if(mo)out.push(`${m[3]}-${p2(mo)}-${p2(m[2])}`)}
+  return out;
+}
+function tableGrid(tb){
+  const grid=[],span=[];
+  [...tb.rows].forEach(tr=>{
+    const row=[];let ci=0;
+    const fill=()=>{while(span[ci]&&span[ci].n>0){row[ci]=span[ci].v;span[ci].n--;ci++}};
+    [...tr.cells].forEach(c=>{
+      fill();
+      const rs=+c.rowSpan||1,cs=+c.colSpan||1,v=c.textContent.replace(/\[[^\]]*\]/g,'').replace(/\s+/g,' ').trim();
+      for(let k=0;k<cs;k++){row[ci]=v;if(rs>1)span[ci]={v,n:rs-1};ci++}
+    });
+    fill();
+    grid.push({row,hdr:tr.cells.length>0&&[...tr.cells].every(c=>c.tagName==='TH')});
+  });
+  return grid;
+}
+async function wikiTour(artist,date){
+  const api='https://en.wikipedia.org/w/api.php',at=toks(artist);
+  const sr=await jget(`${api}?action=query&list=search&srsearch=${encodeURIComponent(artist+' tour '+date.slice(0,4))}&srlimit=8&format=json&origin=*`);
+  const cands=(sr.query?.search||[]).filter(x=>{const h=(x.title+' '+(x.snippet||'').replace(/<[^>]+>/g,'')).toLowerCase();return at.every(t=>h.includes(t))&&/tour|concert/.test(h)}).slice(0,5);
+  const pages=await Promise.all(cands.map(c=>jget(`${api}?action=parse&page=${encodeURIComponent(c.title)}&prop=text&redirects=1&format=json&origin=*&disableeditsection=1`).then(r=>({title:c.title,html:r.parse?.text?.['*']||''})).catch(()=>null)));
+  for(const pg of pages){
+    if(!pg||!pg.html)continue;
+    const doc=new DOMParser().parseFromString(pg.html,'text/html');
+    for(const tb of doc.querySelectorAll('table.wikitable')){
+      let cols=null;
+      for(const {row,hdr} of tableGrid(tb)){
+        if(hdr&&row.some(c=>/date/i.test(c))){const ix=re=>{const i=row.findIndex(c=>re.test(c));return i<0?undefined:i};cols={date:ix(/date/i)??0,venue:ix(/venue|stadium|arena/i),city:ix(/city|location/i),country:ix(/country/i)};continue}
+        if(!cols||!parseDates(row[cols.date]).includes(date))continue;
+        let city=cols.city!=null?row[cols.city]:'',country=cols.country!=null?row[cols.country]:'';
+        if(!country&&city.includes(',')){const q=city.split(',').map(x=>x.trim());country=q.pop();city=q.join(', ')}
+        const img=doc.querySelector('table.infobox img'),src=img?img.getAttribute('src'):'';
+        return{name:pg.title.replace(/\s*\((concert )?tour\)$/i,''),venue:cols.venue!=null?row[cols.venue]:'',city,country,link:'https://en.wikipedia.org/wiki/'+encodeURIComponent(pg.title.replace(/ /g,'_')),poster:src?('https:'+src.replace(/^https?:/,'')).replace(/\/\d+px-/,'/330px-'):''};
+      }
+    }
+  }
+  return null;
+}
 async function autofill(){
   const artist=$('artist').value.trim(),date=$('date').value,hint=[$('subSw').getAttribute('aria-checked')==='true'?$('subunit').value.trim():'',$('city').value.trim(),$('country').value.trim()].filter(Boolean).join(', '),link=$('link').value.trim();
   ['artist','date'].forEach(k=>$(k).classList.toggle('invalid',!$(k).value.trim()));
@@ -586,6 +637,7 @@ async function autofill(){
     catch(e){note+=' The search proxy did not respond.'}
     try{const sl=await fromSetlistFm(artist,date);if(sl){info={...sl,...info,venue:info.venue||sl.venue,city:info.city||sl.city,country:info.country||sl.country,name:info.name||sl.name,setlistUrl:sl.setlistUrl,songs:sl.songs};if(sl.songs?.length)got.push('setlist.fm')}}catch(e){}
   }else if(link)note+=' To read an announcement link, set up the search proxy in Settings.';
+  if(!info.venue||!info.name){try{const w=await wikiTour(artist,date);if(w){info={...info,name:info.name||w.name,venue:info.venue||w.venue,city:info.city||w.city,country:info.country||w.country,link:info.link||w.link};if(w.poster&&!$('poster').value){$('poster').value=w.poster;setThumb(w.poster)}got.push('Wikipedia tour dates')}}catch(e){}}
   if(!info.venue){try{const m=await fromMusicBrainz(artist,date);if(m?.venue){info={...m,...info,venue:m.venue,city:info.city||m.city,name:info.name||m.name};got.push('MusicBrainz')}}catch(e){}}
   if(info.venue&&!$('venue').value)$('venue').value=info.venue;
   if(info.city&&!$('city').value)$('city').value=info.city;
@@ -615,6 +667,8 @@ async function autofill(){
     const m=shows.filter(x=>x.id!==editId&&x.artist.trim().toLowerCase()===artist.toLowerCase()&&(x.venue||'').trim().toLowerCase()===v&&Math.abs(new Date(x.date+'T12:00:00')-d)<14*864e5).sort((a,b)=>a.date.localeCompare(b.date))[0];
     if(m){$('repeatOf').value=m.id;note+=' Marked as a repeat of '+fmt(m.date)+'.'}
   }
+  const miss=[['tour name','name'],['venue','venue'],['city','city'],['country','country']].filter(([l,k])=>!$(k).value.trim()).map(x=>x[0]);
+  if(got.length&&miss.length)note+=` Still empty: ${miss.join(', ')}.`+(proxy?' Try pasting the announcement link.':' Paste the announcement link, or set up the search proxy in Settings, to fill more.');
   $('status').textContent=got.length?'Filled from '+got.join(', ')+'.'+note+' Check the details, then save.':
     (netOk?'Nothing found for that artist and date.'+note+' Try the Romanized name, add a city or paste the announcement link. You can also type everything in by hand.':"Couldn't reach the lookup services. The test link blocks them, so use the GitHub Pages version. You can still type everything in by hand.");
   if(['born','songs','repeatOf'].some(k=>$(k).value))$('extra').open=true;
