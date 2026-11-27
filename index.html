@@ -51,14 +51,14 @@ h1{font-size:clamp(46px,12.5vw,108px);line-height:.9;letter-spacing:-.035em}
 .mi{display:flex;align-items:center;gap:12px;width:100%;border:none;background:none;border-radius:12px;padding:11px 10px;font-weight:600;font-size:16px;text-align:left;cursor:pointer;color:var(--ink)}
 .mi::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--c,var(--rust));flex:none}
 .mi:hover,.mi:focus-visible{background:var(--bg)}
-#wrap{--c:var(--mustard)}#wall{--c:var(--pumpkin)}#cfg{--c:var(--plum)}#upc{--c:var(--s1)}#calb{--c:var(--olive)}#nerd{--c:var(--burgundy)}
+#wrap{--c:var(--mustard)}#wall{--c:var(--pumpkin)}#cfg{--c:var(--plum)}#upc{--c:var(--s1)}#calb{--c:var(--olive)}#tierb{--c:var(--s2)}#nerd{--c:var(--burgundy)}
 @media (max-width:480px){.hero .stat{padding:2px 11px;font-size:10px;letter-spacing:.12em}.hero .stat b{font-size:30px}.bar{gap:8px}.btn{padding:9px 16px}select{padding:8px 8px}}
 .hero .stat b{font-size:34px;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin:0;text-transform:none}
 .stat{background:var(--ink);color:var(--bg);border-radius:999px;padding:6px 16px;font-weight:600}
 .stat b{font-family:'Bricolage Grotesque',sans-serif;font-size:1.25em;margin-right:6px;color:var(--yellow)}
 .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center}
 input,button,textarea{font:inherit;color:inherit}
-input[type=text],input[type=date],input[type=url],textarea,input[type=search]{background:var(--card);border:2px solid var(--ink);border-radius:12px;padding:10px 12px;width:100%}
+input[type=text],input[type=date],input[type=url],input[type=number],textarea,input[type=search]{background:var(--card);border:2px solid var(--ink);border-radius:12px;padding:10px 12px;width:100%}
 input:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
 .bar input[type=search]{flex:1 1 100%;max-width:440px;width:auto;margin:0 auto 6px;text-align:center;border-radius:999px;padding:12px 18px}
 .btn{background:var(--card);border:2px solid var(--ink);border-radius:999px;padding:10px 20px;font-weight:600;cursor:pointer;box-shadow:none}
@@ -218,6 +218,37 @@ h1.hello small{display:block;font-family:Figtree,system-ui,sans-serif;font-size:
 .lblrow{display:flex;justify-content:space-between;align-items:flex-end;margin:12px 0 4px}.lblrow label{margin:0}
 .subtog{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted)}
 .ticket .usub{font-size:10.5px;font-weight:600;color:var(--accent);margin:0 0 2px;line-height:1.2}
+
+.money{display:flex;align-items:center;gap:8px}.money span{font-weight:800;font-size:18px;color:var(--muted);flex:none}
+.money input{min-width:0}
+
+.page{position:fixed;inset:0;z-index:40;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.page[hidden]{display:none}
+.pbar{position:sticky;top:0;z-index:3;background:var(--bg);display:flex;align-items:center;gap:14px;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px;border-bottom:1px solid var(--line)}
+.pbar b{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800}
+.ptabs{display:flex;gap:8px;padding:14px 16px 0;max-width:900px;margin:auto;flex-wrap:wrap}
+.pwrap{max-width:900px;margin:auto;padding:4px 16px 80px}
+.piegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.piecard{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px}
+.piecard h3{margin:0 0 8px;font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800}
+.pie{width:140px;height:140px;display:block;margin:0 auto 10px}
+.pie text{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;fill:var(--ink)}
+.pleg{list-style:none;margin:0;padding:0;font-size:13px}.pleg li{display:flex;align-items:center;gap:8px;padding:2px 0}
+.pleg i{width:11px;height:11px;border-radius:50%;flex:none}.pleg span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pleg b{color:var(--muted);font-weight:600}
+.rank{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px;font-weight:600}
+.rank .n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:var(--accent);font-size:22px}
+.rank small{display:block;color:var(--muted);font-weight:600;font-size:12px}.rank b{color:var(--muted)}
+
+.tierpick{display:flex;gap:8px;flex-wrap:wrap}
+.tierchip{width:44px;height:44px;border-radius:12px;border:2px solid var(--ink);background:var(--card);font:800 20px 'Bricolage Grotesque',sans-serif;color:var(--ink);cursor:pointer;padding:0}
+.tierchip[aria-pressed=true]{background:var(--tc);color:var(--tf,#fbf6e9);border-color:var(--tc)}
+.tierrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px}.tierrow>span{font-weight:600;color:var(--muted);font-size:14px;margin-right:4px}
+.trow{display:flex;border:2px solid var(--ink);border-radius:14px;overflow:hidden;margin-bottom:8px;background:var(--card)}
+.tlabel{flex:none;width:56px;display:grid;place-items:center;font:800 30px 'Bricolage Grotesque',sans-serif;color:var(--tf,#fbf6e9);background:var(--tc)}
+.tposters{display:flex;flex-wrap:wrap;gap:6px;padding:8px;min-height:74px;align-items:flex-start;flex:1;min-width:0}
+.cbox.big{width:58px;height:58px;font-size:22px}
+#tierHint{margin:8px 0 12px}
+.tempty{color:var(--muted);font-size:13px;font-weight:600;align-self:center}
 </style>
 </head>
 <body>
@@ -230,6 +261,7 @@ h1.hello small{display:block;font-family:Figtree,system-ui,sans-serif;font-size:
       <button class="mi" id="wall">Poster wall</button>
       <button class="mi" id="upc">Upcoming concerts</button>
       <button class="mi" id="calb">Year calendar</button>
+      <button class="mi" id="tierb">Tier list</button>
       <button class="mi" id="nerd">Statistics for nerds</button>
               <button class="mi" id="cfg">Settings</button>
     </div>
@@ -261,22 +293,26 @@ h1.hello small{display:block;font-family:Figtree,system-ui,sans-serif;font-size:
   <div class="cands" id="cands"></div>
   <label for="name">Tour or event name</label><input type="text" id="name">
   <label for="venue">Venue</label><input type="text" id="venue">
+  <label>Tier (for your tier list)</label>
+  <div class="tierpick" id="tierPick" role="group" aria-label="Tier"></div>
   <div class="ac"><label for="genre">Genre</label><input type="text" id="genre" autocomplete="off" placeholder="K-pop"><div class="sug" id="genreSug" hidden></div></div>
   <label for="poster">Poster image link</label><input type="url" id="poster" placeholder="https://…">
   <label for="upload">Or upload your own ticket or poster photo</label><input type="file" id="upload" accept="image/*">
   <div class="thumb" id="thumb"></div>
   <details id="extra"><summary>Extra details for your stats</summary>
     <div class="row">
-      <div><label for="hoursH">Time at the show</label><div class="dur"><input type="number" id="hoursH" min="0" inputmode="numeric" placeholder="0"><span>hrs</span><input type="number" id="hoursM" min="0" max="59" inputmode="numeric" placeholder="0"><span>mins</span></div></div>
-      <div><label for="price">Price you paid</label><input type="number" id="price" min="0" step="0.01"></div>
-      <div><label for="face">Original face value</label><input type="number" id="face" min="0" step="0.01"></div>
+      <div style="grid-column:1/-1"><label for="hoursH">Time at the show</label><div class="dur"><input type="number" id="hoursH" min="0" inputmode="numeric" placeholder="0"><span>hrs</span><input type="number" id="hoursM" min="0" max="59" inputmode="numeric" placeholder="0"><span>mins</span></div></div>
+      <div><label for="price">Price you paid</label><div class="money"><span class="cur">$</span><input type="number" id="price" min="0" step="0.01" inputmode="decimal"></div></div>
+      <div><label for="face">Original face value</label><div class="money"><span class="cur">$</span><input type="number" id="face" min="0" step="0.01" inputmode="decimal"></div></div>
       <div class="ac"><label for="platform">Ticketing platform</label><input type="text" id="platform" autocomplete="off" placeholder="Start typing…"><div class="sug" id="platSug" hidden></div></div>
-      <div><label for="travelH">Travel time to the venue (one way)</label><div class="dur"><input type="number" id="travelH" min="0" inputmode="numeric" placeholder="0"><span>hrs</span><input type="number" id="travelM" min="0" max="59" inputmode="numeric" placeholder="0"><span>mins</span></div></div>
-      <div><label for="videoGB">Videos recorded (GB)</label><input type="number" id="videoGB" min="0" step="0.1"></div>
+      <div style="grid-column:1/-1"><label for="travelH">Travel time to the venue (one way)</label><div class="dur"><input type="number" id="travelH" min="0" inputmode="numeric" placeholder="0"><span>hrs</span><input type="number" id="travelM" min="0" max="59" inputmode="numeric" placeholder="0"><span>mins</span></div></div>
+      <div><label for="videoGB">Videos recorded</label><div class="money"><input type="number" id="videoGB" min="0" step="0.1" inputmode="decimal"><span>GB</span></div></div>
       <div><label for="repeatOf">Repeat of an earlier show?</label><select id="repeatOf" style="width:100%"></select></div>
     </div>
     <label for="born">Performer birth dates (one per member on stage, separated by commas). Type just the names of who performed and Autofill adds the dates.</label><textarea id="born" rows="2" placeholder="Leave empty for the whole group, or: Bang Chan, Han, Felix"></textarea>
-    <label for="songs">Setlist (one song per line)</label><textarea id="songs" rows="4"></textarea>
+    <div class="lblrow"><label for="songs">Setlist (one song per line)</label><button type="button" class="btn sm mint" id="slAuto">Autofill setlist</button></div>
+    <textarea id="songs" rows="4"></textarea>
+    <p class="status" id="slStatus" role="status"></p>
   </details>
   <label for="notes">Notes</label><textarea id="notes" rows="2" placeholder="Who you went with, best song, seats…"></textarea>
   <div class="foot"><button class="btn" id="cancel">Cancel</button><button class="btn pri" id="save">Save show</button></div>
@@ -288,7 +324,16 @@ h1.hello small{display:block;font-family:Figtree,system-ui,sans-serif;font-size:
 
 <dialog id="odlg"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><h2 id="wtitle">My concert wall</h2><button class="btn sm" id="oclose">Close</button></div><p class="sub">Every show you've been to. Take a screenshot to share it.</p><div class="stats" id="ostats"></div><div id="wallbody"></div></dialog>
 
-<dialog id="ndlg"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><h2>Statistics for nerds</h2><button class="btn sm" id="nclose">Close</button></div><p class="sub">Your years side by side. Add shows from more than one year to compare.</p><div id="nbody"></div></dialog>
+<section class="page" id="statspage" hidden aria-label="Statistics for nerds">
+  <div class="pbar"><button class="btn sm" id="spBack">&#8249; Back</button><b>Statistics for nerds</b></div>
+  <div class="ptabs"><button type="button" class="chip" id="tabOver" aria-pressed="true">Overview</button><button type="button" class="chip" id="tabPeople" aria-pressed="false">Performers &amp; songs</button></div>
+  <div class="pwrap"><div class="chips" id="spScope"></div><div id="spMain"></div><div id="spPeople" hidden></div></div>
+</section>
+
+<section class="page" id="tierpage" hidden aria-label="Tier list">
+  <div class="pbar"><button class="btn sm" id="tierBack">&#8249; Back</button><b>Tier list</b></div>
+  <div class="pwrap"><div class="chips" id="tierScope"></div><p class="sub" id="tierHint"></p><div id="tierBody"></div></div>
+</section>
 
 <dialog id="udlg"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><h2>Upcoming concerts</h2><button class="btn sm" id="uclose">Close</button></div><p class="sub">Planned shows. Each one moves to your main page by itself once the day has passed.</p><button class="btn pri" id="uadd" style="margin:8px 0 14px">Add an upcoming concert</button><div id="ulist"></div></dialog>
 
@@ -404,7 +449,7 @@ function renderGrid(){
   emptyEl.querySelector('h2').textContent=att().length?'No matches':(shows.length?'No past concerts yet':'Your wall is empty');
   emptyEl.querySelector('p').textContent=att().length?'This box only searches shows you have already added.':(shows.length?'Your planned concerts are under Menu, then Upcoming concerts.':'Tap “Add a show”, enter the artist and date, and let autofill do the rest.');
 }
-function render(){renderChips();renderHello();updateDays();renderGrid();if($('udlg').open)fillUpcoming();if($('caldlg').open)renderCal()}
+function render(){renderChips();renderHello();updateDays();renderGrid();if(!$('statspage').hidden)renderStats();if(!$('tierpage').hidden)renderTiers();if($('udlg').open)fillUpcoming();if($('caldlg').open)renderCal()}
 function openDetail(id){
   const s=shows.find(x=>x.id===id);if(!s)return;
   const c=$('fcard');c.innerHTML='';
@@ -427,6 +472,11 @@ function openDetail(id){
   if(dl.children.length)b.append(dl);
   if((s.songs||[]).length){const d=document.createElement('details'),sm=document.createElement('summary'),ol=document.createElement('ol');sm.textContent='Setlist ('+s.songs.length+' songs)';s.songs.forEach(x=>{const li=document.createElement('li');li.textContent=x;ol.append(li)});d.append(sm,ol);b.append(d)}
   if(s.notes){const n=document.createElement('p');n.className='note';n.textContent=s.notes;b.append(n)}
+  if(s.date<=todayStr()){
+    const tr=document.createElement('div');tr.className='tierrow';tr.append(el('span','','Tier'));const pk=document.createElement('div');pk.className='tierpick';
+    const draw=()=>tierChips(pk,s.tier||'',t=>{s.tier=(s.tier===t?'':t);s.updatedAt=Date.now();persist();render();draw()});
+    draw();tr.append(pk);b.append(tr);
+  }
   const acts=document.createElement('div');acts.className='acts';
   [[s.link,'Announcement'],[s.setlistUrl,'Setlist.fm']].forEach(([u,l])=>{if(u){const a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';a.className='btn sm';a.textContent=l;acts.append(a)}});
   const ed=document.createElement('button');ed.className='btn sm pri';ed.textContent='Edit';ed.onclick=()=>{$('fdlg').close();openDlg(s.id)};
@@ -451,8 +501,8 @@ function openDlg(id,up){
   $('dtitle').textContent=id?'Edit show':up?'Add an upcoming concert':'Add a show';
   ['artist','date','name','venue','city','poster','notes','price','videoGB','face','born','link','country','genre'].forEach(k=>$(k).value=s[k]||'');
   found.setlistUrl=s.setlistUrl||'';
-  $('songs').value=(s.songs||[]).join('\n');fillRepeat(id,s.repeatOf);setPlatform(s.platform||'');setSub(!!s.subunit,s.subunit);setDur('hoursH','hoursM',(s.hours||0)*60);setDur('travelH','travelM',s.travel||0);$('cands').innerHTML='';['artist','date'].forEach(k=>$(k).classList.remove('invalid'));
-  $('upload').value='';$('status').textContent='';setThumb(s.poster);showM($('dlg'));
+  $('songs').value=(s.songs||[]).join('\n');fillRepeat(id,s.repeatOf);setPlatform(s.platform||'');setTier(s.tier||'');setSub(!!s.subunit,s.subunit);setDur('hoursH','hoursM',(s.hours||0)*60);setDur('travelH','travelM',s.travel||0);$('cands').innerHTML='';['artist','date'].forEach(k=>$(k).classList.remove('invalid'));
+  $('upload').value='';$('status').textContent='';$('slStatus').textContent='';setThumb(s.poster);showM($('dlg'));
 }
 
 const CUR='$'; // change to your currency symbol
@@ -480,6 +530,7 @@ function getPlatform(){return snap($('platform').value,uniqPrev(s=>s.platform))}
 function getDur(h,m){const x=(parseInt($(h).value)||0)*60+(parseInt($(m).value)||0);return x>0?x:0}
 function setDur(h,m,mins){mins=Math.round(mins||0);$(h).value=mins?Math.floor(mins/60):'';$(m).value=mins?mins%60:''}
 const fdur=mins=>{mins=Math.round(mins);const h=Math.floor(mins/60),m=mins%60;return ((h?h+' hr'+(h>1?'s':''):'')+(h&&m?' ':'')+(m?m+' min'+(m>1?'s':''):''))||'0 mins'};
+document.querySelectorAll('.cur').forEach(e=>{e.textContent=CUR});
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let netOk=false,bornDbg='';
 const jget=async u=>{const r=await fetch(u);netOk=true;if(!r.ok)throw new Error(r.status);return r.json()};
@@ -488,7 +539,7 @@ async function fromSetlistFm(artist,date){
   const proxy=getProxy();if(!proxy)return null;
   const [y,m,d]=date.split('-');
   const j=await jget(`${proxy.replace(/\/$/,'')}/?artist=${encodeURIComponent(artist)}&date=${d}-${m}-${y}`);
-  const s=(j.setlist||[])[0];if(!s)return null;
+  const s=(j.setlist||[]).find(x=>{const n=(x.artist&&x.artist.name)||'';return sameSet(n,artist)||nameMatch(n,artist)});if(!s)return null;
   return{venue:s.venue?.name,city:s.venue?.city?.name,country:s.venue?.city?.country?.name,name:s.tour?.name,setlistUrl:s.url,songs:(s.sets?.set||[]).flatMap(x=>x.song||[]).map(x=>x.name).filter(Boolean)};
 }
 async function fromMusicBrainz(artist,date){
@@ -551,20 +602,31 @@ const cname=c=>{c=(c||'').trim();if(/^[A-Za-z]{2}$/.test(c)){try{return new Intl
 const cleanTitle=t=>(t||'').split(/\s[|\u2013\u2014-]\s/)[0].trim();
 async function smartLookup(artist,date,hint,link){
   const base=getProxy().replace(/\/$/,'');
-  if(link){const j=await jget(`${base}/page?url=${encodeURIComponent(link)}`);return{pages:j.error?[]:[j],images:[],error:j.error}}
+  if(link){const j=await jget(`${base}/page?url=${encodeURIComponent(link)}&artist=${encodeURIComponent(artist)}&date=${date}`);return{pages:j.error?[]:[j],images:[],error:j.error}}
   return jget(`${base}/find?artist=${encodeURIComponent(artist)}&date=${date}&hint=${encodeURIComponent(hint)}`);
 }
 function applySmart(r,date,fromLink){
-  const pages=r.pages||[],out={info:{},images:[],trusted:'',got:'',note:r.error?' '+r.error:''};
-  const ev=pages.filter(x=>x.event),match=ev.find(x=>(x.event.startDate||'').slice(0,10)===date),pick=match||ev[0]||null;
-  if(pick){
-    const e=pick.event;out.info={venue:e.venue,city:e.city,country:cname(e.country),name:e.name,link:pick.url};out.got=fromLink?'the announcement page':'Google search';
-    if(!match&&e.startDate)out.note+=` The date on that page (${e.startDate.slice(0,10)}) does not match yours, so please double-check.`;
-    const im=e.image||pick.image;if(im){out.images.push(im);if(match||fromLink)out.trusted=im}
+  const out={info:{},images:[],trusted:'',got:'',note:r.error?' '+r.error:''};
+  const raw=r.pages||[];
+  // a page only counts if it mentions the performer AND the date, and is not a long list of other shows
+  const pages=fromLink?raw:raw.filter(x=>x.artistInHead&&(x.dateMatch||x.hasDate)&&!(x.eventCount>3&&!x.dateMatch)&&!/wikipedia\.org|wikiwand|fandom\.com/i.test(x.url||'')&&!/^list of|discography|\btours\b/i.test(x.title||''));
+  if(!fromLink&&raw.length&&!pages.length)out.note+=' Search found pages, but none matched both the performer and the date, so I ignored them.';
+  const exact=pages.find(x=>x.event&&x.dateMatch);
+  if(exact){
+    const e=exact.event;out.info={venue:e.venue,city:e.city,country:cname(e.country),name:e.name,link:exact.url};
+    out.got=fromLink?'the announcement page':'Google search (performer and date matched)';
+    const im=e.image||exact.image;if(im){out.images.push(im);out.trusted=im}
+  }else if(fromLink&&pages[0]){
+    const x=pages[0];
+    if(x.event&&x.event.startDate)out.note+=` That page's event is on ${x.event.startDate.slice(0,10)}, not ${date}, so I did not copy its details.`;
+    else{
+      out.info={name:cleanTitle(x.title),link:x.url};out.got='the announcement page title';
+      if(!x.artistInHead)out.note+=' That page does not seem to be about this performer, so check it.';
+      if(!x.hasDate)out.note+=' It does not show your date either.';
+      out.note+=' Could not read the venue, so please add it yourself.';
+    }
   }else if(pages[0]){
-    const x=pages[0];out.info={name:cleanTitle(x.title),link:x.url};out.got=fromLink?'the announcement page title':'Google search';
-    out.note+=' Could not read the venue from that page, so please add it yourself.';
-    if(x.image){out.images.push(x.image);if(fromLink)out.trusted=x.image}
+    out.info={link:pages[0].url};out.got='a Google result mentioning both';out.note+=' It did not list venue details, so I only added the link.';
   }
   pages.forEach(x=>{if(x.image)out.images.push(x.image)});(r.images||[]).forEach(i=>out.images.push(i.thumb||i.url));
   out.images=[...new Set(out.images.filter(Boolean))].slice(0,8);return out;
@@ -606,7 +668,7 @@ function tableGrid(tb){
 async function wikiTour(artist,date){
   const api='https://en.wikipedia.org/w/api.php',at=toks(artist);
   const sr=await jget(`${api}?action=query&list=search&srsearch=${encodeURIComponent(artist+' tour '+date.slice(0,4))}&srlimit=8&format=json&origin=*`);
-  const cands=(sr.query?.search||[]).filter(x=>{const h=(x.title+' '+(x.snippet||'').replace(/<[^>]+>/g,'')).toLowerCase();return at.every(t=>h.includes(t))&&/tour|concert/.test(h)}).slice(0,5);
+  const cands=(sr.query?.search||[]).filter(x=>{const h=(x.title+' '+(x.snippet||'').replace(/<[^>]+>/g,'')).toLowerCase();return at.every(t=>h.includes(t))&&/tour|concert/.test(h)&&!/^list of|discography|videography|filmography|\btours\b/i.test(x.title)}).slice(0,5);
   const pages=await Promise.all(cands.map(c=>jget(`${api}?action=parse&page=${encodeURIComponent(c.title)}&prop=text&redirects=1&format=json&origin=*&disableeditsection=1`).then(r=>({title:c.title,html:r.parse?.text?.['*']||''})).catch(()=>null)));
   for(const pg of pages){
     if(!pg||!pg.html)continue;
@@ -615,7 +677,7 @@ async function wikiTour(artist,date){
       let cols=null;
       for(const {row,hdr} of tableGrid(tb)){
         if(hdr&&row.some(c=>/date/i.test(c))){const ix=re=>{const i=row.findIndex(c=>re.test(c));return i<0?undefined:i};cols={date:ix(/date/i)??0,venue:ix(/venue|stadium|arena/i),city:ix(/city|location/i),country:ix(/country/i)};continue}
-        if(!cols||!parseDates(row[cols.date]).includes(date))continue;
+        if(!cols||(cols.venue==null&&cols.city==null)||!parseDates(row[cols.date]).includes(date))continue;
         let city=cols.city!=null?row[cols.city]:'',country=cols.country!=null?row[cols.country]:'';
         if(!country&&city.includes(',')){const q=city.split(',').map(x=>x.trim());country=q.pop();city=q.join(', ')}
         const img=doc.querySelector('table.infobox img'),src=img?img.getAttribute('src'):'';
@@ -625,6 +687,21 @@ async function wikiTour(artist,date){
   }
   return null;
 }
+async function autofillSetlist(){
+  const artist=$('artist').value.trim(),date=$('date').value,st=$('slStatus');
+  ['artist','date'].forEach(k=>$(k).classList.toggle('invalid',!$(k).value.trim()));
+  if(!artist||!date){st.textContent='Fill in the artist and date at the top first.';return}
+  if(!getProxy()){st.textContent='Setlists come from setlist.fm through the search proxy. Set it up in Settings first.';return}
+  const btn=$('slAuto');btn.disabled=true;st.textContent='Looking up the setlist…';
+  try{
+    const sl=await fromSetlistFm(artist,date);
+    if(!sl||!sl.songs||!sl.songs.length){st.textContent='No setlist found on setlist.fm for that artist and date. Future, very new or small shows are often missing.'}
+    else if($('songs').value.trim()&&!confirm('Replace the songs already in the box with the setlist.fm one?')){st.textContent='Left your songs as they were.'}
+    else{$('songs').value=sl.songs.join('\n');if(sl.setlistUrl)found.setlistUrl=sl.setlistUrl;st.textContent=`Filled ${sl.songs.length} songs from setlist.fm. Check them, then save.`}
+  }catch(e){st.textContent='The search proxy did not respond.'}
+  btn.disabled=false;
+}
+$('slAuto').onclick=autofillSetlist;
 async function autofill(){
   const artist=$('artist').value.trim(),date=$('date').value,hint=[$('subSw').getAttribute('aria-checked')==='true'?$('subunit').value.trim():'',$('city').value.trim(),$('country').value.trim()].filter(Boolean).join(', '),link=$('link').value.trim();
   ['artist','date'].forEach(k=>$(k).classList.toggle('invalid',!$(k).value.trim()));
@@ -632,10 +709,9 @@ async function autofill(){
   const btn=$('auto');btn.disabled=true;netOk=false;bornDbg='';$('status').textContent='Searching…';$('cands').innerHTML='';
   const got=[];let note='',info={},imgs=[],proxy=getProxy();
   if(proxy){
-    try{const a=applySmart(await smartLookup(artist,date,hint,link),date,!!link);info=a.info;imgs=a.images;note+=a.note;if(a.got&&(info.venue||info.name))got.push(a.got);
+    try{const a=applySmart(await smartLookup(artist,date,hint,link),date,!!link);info=a.info;imgs=a.images;note+=a.note;if(a.got&&(info.venue||info.name||info.link))got.push(a.got);
       if(a.trusted&&!$('poster').value){$('poster').value=a.trusted;setThumb(a.trusted)}}
     catch(e){note+=' The search proxy did not respond.'}
-    try{const sl=await fromSetlistFm(artist,date);if(sl){info={...sl,...info,venue:info.venue||sl.venue,city:info.city||sl.city,country:info.country||sl.country,name:info.name||sl.name,setlistUrl:sl.setlistUrl,songs:sl.songs};if(sl.songs?.length)got.push('setlist.fm')}}catch(e){}
   }else if(link)note+=' To read an announcement link, set up the search proxy in Settings.';
   if(!info.venue||!info.name){try{const w=await wikiTour(artist,date);if(w){info={...info,name:info.name||w.name,venue:info.venue||w.venue,city:info.city||w.city,country:info.country||w.country,link:info.link||w.link};if(w.poster&&!$('poster').value){$('poster').value=w.poster;setThumb(w.poster)}got.push('Wikipedia tour dates')}}catch(e){}}
   if(!info.venue){try{const m=await fromMusicBrainz(artist,date);if(m?.venue){info={...m,...info,venue:m.venue,city:info.city||m.city,name:info.name||m.name};got.push('MusicBrainz')}}catch(e){}}
@@ -645,7 +721,6 @@ async function autofill(){
   if(info.name&&!$('name').value)$('name').value=info.name;
   if(info.link&&!$('link').value)$('link').value=info.link;
   if(info.setlistUrl)found.setlistUrl=info.setlistUrl;
-  if(info.songs?.length&&!$('songs').value.trim())$('songs').value=info.songs.join('\n');
   if(imgs.length)showCands(imgs.filter(u=>u!==$('poster').value));
   const bornParts=$('born').value.split(/[;,\n]+/).map(x=>x.trim()).filter(Boolean);
   if(bornParts.length&&bornParts.some(x=>!/\d{4}/.test(x))){
@@ -694,7 +769,7 @@ $('upload').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const 
 $('save').onclick=()=>{
   const artist=snap($('artist').value,uniqPrev(s=>s.artist)),date=$('date').value;
   if(!artist||!date){$('status').textContent='Artist and date are required.';return}
-  const rec={updatedAt:Date.now(),id:editId||(String(Date.now())+Math.random().toString(36).slice(2,5)),artist,date,name:$('name').value.trim(),venue:$('venue').value.trim(),subunit:$('subSw').getAttribute('aria-checked')==='true'?$('subunit').value.trim():'',city:$('city').value.trim(),country:snap($('country').value,uniqPrev(s=>s.country)),genre:snap($('genre').value,[...uniqPrev(s=>s.genre),...GENRES]),poster:$('poster').value.trim(),notes:$('notes').value.trim(),hours:Math.round(getDur('hoursH','hoursM')/60*10000)/10000,price:num('price'),face:num('face'),travel:getDur('travelH','travelM'),born:$('born').value.trim(),repeatOf:$('repeatOf').value,songs:$('songs').value.split('\n').map(x=>x.trim()).filter(Boolean),platform:getPlatform(),link:$('link').value.trim(),videoGB:num('videoGB'),setlistUrl:found.setlistUrl||''};
+  const rec={updatedAt:Date.now(),id:editId||(String(Date.now())+Math.random().toString(36).slice(2,5)),artist,date,name:$('name').value.trim(),venue:$('venue').value.trim(),subunit:$('subSw').getAttribute('aria-checked')==='true'?$('subunit').value.trim():'',tier:getTier(),city:$('city').value.trim(),country:snap($('country').value,uniqPrev(s=>s.country)),genre:snap($('genre').value,[...uniqPrev(s=>s.genre),...GENRES]),poster:$('poster').value.trim(),notes:$('notes').value.trim(),hours:Math.round(getDur('hoursH','hoursM')/60*10000)/10000,price:num('price'),face:num('face'),travel:getDur('travelH','travelM'),born:$('born').value.trim(),repeatOf:$('repeatOf').value,songs:$('songs').value.split('\n').map(x=>x.trim()).filter(Boolean),platform:getPlatform(),link:$('link').value.trim(),videoGB:num('videoGB'),setlistUrl:found.setlistUrl||''};
   shows=editId?shows.map(s=>s.id===editId?rec:s):[...shows,rec];
   persist();render();$('dlg').close();
   if(rec.date>todayStr()&&!$('udlg').open)openUpcoming();
@@ -791,6 +866,35 @@ function paintTheme(){
 $('themeSw').onclick=()=>{const n=curTheme()==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('concerts.theme',n)}catch(e){}paintTheme()};
 try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(!document.documentElement.getAttribute('data-theme'))paintTheme()})}catch(e){}
 paintTheme();
+
+/* ---------- Tier list ---------- */
+const TIERS=[['S','#c4512f','#fbf6e9'],['A','#d9822b','#1f3d2b'],['B','#e3a72f','#1f3d2b'],['C','#a8c09a','#1f3d2b'],['D','#6b7f3a','#fbf6e9'],['F','#7a2f22','#fbf6e9']];
+let tierScope='all',formTier='';
+function tierChips(container,current,onPick){
+  container.innerHTML='';
+  TIERS.forEach(([t,c,f])=>{const b=document.createElement('button');b.type='button';b.className='tierchip';b.textContent=t;b.style.setProperty('--tc',c);b.style.setProperty('--tf',f);b.setAttribute('aria-pressed',String(current===t));b.setAttribute('aria-label','Tier '+t);b.onclick=()=>onPick(t);container.append(b)});
+}
+function setTier(v){formTier=v||'';tierChips($('tierPick'),formTier,t=>setTier(formTier===t?'':t))}
+function getTier(){return formTier}
+function renderTiers(){
+  const years=[...new Set(att().map(s=>s.date.slice(0,4)))].sort().reverse();
+  if(tierScope!=='all'&&!years.includes(tierScope))tierScope='all';
+  const sc=$('tierScope');sc.innerHTML='';sc.append(el('span','','Show:'));
+  ['all',...years].forEach(y=>{const b=el('button','btn sm',y==='all'?'All time':y);b.type='button';if(y===tierScope){b.style.background='var(--accent)';b.style.color='#fbf6e9';b.style.borderColor='var(--accent)'}b.onclick=()=>{tierScope=y;renderTiers()};sc.append(b)});
+  const L=att().filter(s=>tierScope==='all'||s.date.startsWith(tierScope)).sort((a,b)=>b.date.localeCompare(a.date));
+  $('tierHint').textContent=L.length?'Pick a tier when you add a show. Tap a poster to see it, or to change its tier.':'No past concerts yet. Add one and choose its tier in the form.';
+  const body=$('tierBody');body.innerHTML='';
+  const row=(label,c,f,items)=>{
+    const r=el('div','trow'),lb=el('div','tlabel',label);lb.style.setProperty('--tc',c);lb.style.setProperty('--tf',f);
+    const ps=el('div','tposters');
+    items.forEach(s=>{const t=el('button','cbox big');t.type='button';t.title=s.artist+', '+fmt(s.date);t.setAttribute('aria-label',s.artist+', '+fmt(s.date));paintBox(t,s);t.onclick=()=>openDetail(s.id);ps.append(t)});
+    if(!items.length)ps.append(el('span','tempty','Nothing here yet'));
+    r.append(lb,ps);body.append(r);
+  };
+  TIERS.forEach(([t,c,f])=>row(t,c,f,L.filter(s=>s.tier===t)));
+  const un=L.filter(s=>!s.tier||!TIERS.some(x=>x[0]===s.tier));
+  if(un.length)row('?','#b9ae8c','#1f3d2b',un);
+}
 
 /* ---------- Upcoming + calendar ---------- */
 function paintBox(node,s){
@@ -903,9 +1007,107 @@ function barBlock(rows,fmtV){
   rows.forEach(r=>{const row=el('div','br');row.append(el('span','',r.l));const i=el('i');i.style.width=Math.max(r.v/mx*100,1)+'%';if(r.c)i.style.background=r.c;const w=el('div');w.append(i);row.append(w,el('b','',fmtV(r.v)));box.append(row)});
   return box;
 }
-function openNerd(){
-  const body=$('nbody');body.innerHTML='';
-  const A=att();if(!A.length){body.append(el('p','','Nothing to analyse yet. Add a few shows first.'));showM($('ndlg'));return}
+/* ---------- Stats page: charts, people & songs, routing ---------- */
+let spTab='over',statScope='all';
+const scoped=()=>att().filter(s=>statScope==='all'||s.date.startsWith(statScope));
+const PIEC=['#c4512f','#e3a72f','#6b7f3a','#7a2f22','#d9822b','#5b3a4a','#a8c09a','#e8b7a0','#2f5a3f','#9a4a22'];
+function countBy(list,f,keyf){const m=new Map();list.forEach(s=>{const k=(f(s)||'').trim();if(!k)return;const key=keyf?keyf(k):k.toLowerCase(),o=m.get(key)||{label:k,v:0};o.v++;m.set(key,o)});return[...m.values()].sort((a,b)=>b.v-a.v)}
+function pieCard(title,items){
+  const total=items.reduce((a,x)=>a+x.v,0);if(!total)return null;
+  const rows=items.slice(0,6);if(items.length>6)rows.push({label:'Other',v:items.slice(6).reduce((a,x)=>a+x.v,0),other:true});
+  const card=el('div','piecard');card.append(el('h3','',title));
+  const NS='http://www.w3.org/2000/svg',svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 120 120');svg.setAttribute('class','pie');svg.setAttribute('role','img');svg.setAttribute('aria-label',title);
+  const R=40,C=2*Math.PI*R;let off=0;
+  const mk=(stroke,len,o)=>{const c=document.createElementNS(NS,'circle');c.setAttribute('cx','60');c.setAttribute('cy','60');c.setAttribute('r',String(R));c.setAttribute('fill','none');c.setAttribute('stroke',stroke);c.setAttribute('stroke-width','22');c.setAttribute('stroke-dasharray',`${len} ${C-len}`);c.setAttribute('stroke-dashoffset',String(-o));c.setAttribute('transform','rotate(-90 60 60)');return c};
+  svg.append(mk('rgba(127,127,127,.15)',C,0));
+  rows.forEach((r,i)=>{const len=r.v/total*C;svg.append(mk(r.other?'#b9ae8c':PIEC[i%PIEC.length],len,off));off+=len});
+  const t=document.createElementNS(NS,'text');t.setAttribute('x','60');t.setAttribute('y','67');t.setAttribute('text-anchor','middle');t.setAttribute('font-size','20');t.textContent=String(total);svg.append(t);
+  card.append(svg);
+  const ul=el('ul','pleg');
+  rows.forEach((r,i)=>{const li=el('li');const d=el('i');d.style.background=r.other?'#b9ae8c':PIEC[i%PIEC.length];li.append(d,el('span','',r.label),el('b','',r.v+' ('+Math.round(100*r.v/total)+'%)'));ul.append(li)});
+  card.append(ul);return card;
+}
+function pieGrid(L){
+  const g=el('div','piegrid'),add=c=>{if(c)g.append(c)};
+  add(pieCard('Genres',countBy(L,s=>s.genre)));
+  add(pieCard('Top artists',countBy(L,s=>s.artist)));
+  add(pieCard('Countries',countBy(L,s=>s.country,countryKey)));
+  if(homeCountry){const k=L.filter(s=>s.country),h=k.filter(s=>countryKey(s.country)===countryKey(homeCountry)).length;add(pieCard('At home vs abroad',[{label:'At home',v:h},{label:'Abroad',v:k.length-h}].filter(x=>x.v>0)))}
+  add(pieCard('Cities',countBy(L,s=>s.city)));
+  add(pieCard('Ticketing platforms',countBy(L,s=>s.platform)));
+  const pf=L.filter(s=>s.price>0&&s.face>0);
+  add(pieCard('Paid vs face value',[{label:'Below face value',v:pf.filter(s=>s.price<s.face).length},{label:'Face value',v:pf.filter(s=>s.price===s.face).length},{label:'Above face value',v:pf.filter(s=>s.price>s.face).length}].filter(x=>x.v>0)));
+  if(!g.children.length)g.append(el('p','sub','Add genres, countries and ticketing platforms to your shows to see breakdowns here.'));
+  return g;
+}
+const bornPeople=str=>(str||'').split(/[;,\n]+/).map(x=>x.trim()).filter(Boolean).map(x=>{const m=x.match(/\d{4}(?:-\d{2}(?:-\d{2})?)?/);return m?{name:x.slice(0,m.index).trim(),b:m[0]}:null}).filter(Boolean);
+function rankList(items){const box=el('div');items.forEach((x,i)=>{const r=el('div','rank');r.append(el('div','n',String(i+1)));const m=el('div');m.append(el('div','',x.t));if(x.sub)m.append(el('small','',x.sub));r.append(m,el('b','',x.v));box.append(r)});return box}
+function recCards(list){const g=el('div','recs');list.forEach(([k,v,sub])=>{const r=el('div','rec');r.append(el('small','',k),el('b','',v));if(sub)r.append(el('span','sub',sub));g.append(r)});return g}
+function renderPeople(){
+  const box=$('spPeople');box.innerHTML='';const L=scoped();
+  if(!L.length){box.append(el('p','sub','No shows in this period yet.'));return}
+  // performers
+  const apps=[];L.forEach(s=>bornPeople(s.born).forEach(m=>{const a=bornAge(m.b,s.date);if(a!==null)apps.push({s,a,age:Math.floor(a),who:m.name||s.artist,m:m,key:(s.artist+'|'+(m.name||m.b)).toLowerCase()})}));
+  box.append(el('div','nsec','Performers you have seen'));
+  if(!apps.length)box.append(el('p','sub','Add member birth dates to your shows (Extra details) and Autofill can find them for groups. Then this page fills up.'));
+  else{
+    const people=new Set(apps.map(x=>x.key)).size,pairs=[...new Set(apps.map(x=>x.key+'#'+x.age))].map(k=>+k.split('#').pop()).sort((a,b)=>a-b);
+    const avg=apps.reduce((t,x)=>t+x.a,0)/apps.length,med=pairs[Math.floor(pairs.length/2)];
+    const old=apps.reduce((a,b)=>b.a>a.a?b:a),young=apps.reduce((a,b)=>b.a<a.a?b:a);
+    const byAge=new Map();apps.forEach(x=>{(byAge.get(x.age)||byAge.set(x.age,new Set()).get(x.age)).add(x.key)});
+    const common=[...byAge.entries()].sort((a,b)=>b[1].size-a[1].size||a[0]-b[0])[0];
+    const nm=x=>x.who.toLowerCase()===x.s.artist.toLowerCase()?x.s.artist:x.who+' ('+x.s.artist+')';
+    box.append(recCards([['Different performers',String(people)],['Average age',avg.toFixed(1)],['Median age',String(med)],['Most common age',String(common[0]),common[1].size+' performers'],['Youngest',String(Math.floor(young.a)),nm(young)],['Oldest',String(Math.floor(old.a)),nm(old)]]));
+    box.append(el('div','nsec','How many performers at each age'));
+    const ages=[...byAge.keys()].sort((a,b)=>a-b);
+    box.append(barBlock(ages.map(a=>({l:a+' yrs',v:byAge.get(a).size,c:'var(--rust)'})),v=>v));
+    box.append(el('p','sub','Each performer is counted once per age, however many of their shows you went to at that age.'));
+    const grp=[['Under 20',0,19],['20s',20,29],['30s',30,39],['40s',40,49],['50 and over',50,200]].map(([l,lo,hi])=>({label:l,v:[...byAge.entries()].filter(([a])=>a>=lo&&a<=hi).reduce((t,[,st])=>t+st.size,0)})).filter(x=>x.v>0);
+    const pg=el('div','piegrid');const pc=pieCard('Performers by age group',grp);if(pc){pg.append(pc);box.append(el('div','nsec','Age groups'),pg)}
+    const seen=new Map();apps.forEach(x=>{if(!x.m.name)return;const o=seen.get(x.key)||{t:x.m.name,sub:x.s.artist,shows:new Set()};o.shows.add(x.s.id);seen.set(x.key,o)});
+    const top=[...seen.values()].sort((a,b)=>b.shows.size-a.shows.size).slice(0,10);
+    if(top.length){box.append(el('div','nsec','Performers you have seen most'),rankList(top.map(x=>({t:x.t,sub:x.sub,v:x.shows.size+(x.shows.size===1?' show':' shows')}))))}
+    const months=Array(12).fill(0);const seenB=new Set();apps.forEach(x=>{if(x.m.b.length>=7&&!seenB.has(x.key)){seenB.add(x.key);months[+x.m.b.slice(5,7)-1]++}});
+    if(months.some(Boolean)){box.append(el('div','nsec','Performer birthdays by month'),barBlock(MONTHS.map((m,i)=>({l:m.slice(0,3),v:months[i],c:'var(--mustard)'})),v=>v))}
+  }
+  // songs
+  box.append(el('div','nsec','Songs you have watched live'));
+  const sc=new Map();let heard=0;const lens=[];
+  L.forEach(s=>{const seen=new Set();(s.songs||[]).forEach(t=>{const k=(s.artist+'|'+t).trim().toLowerCase();if(seen.has(k))return;seen.add(k);heard++;const o=sc.get(k)||{t:t.trim(),a:s.artist,c:0};o.c++;sc.set(k,o)});if((s.songs||[]).length)lens.push({s,n:s.songs.length})});
+  if(!sc.size)box.append(el('p','sub','No setlists saved yet. Use the Autofill setlist button on a show (needs the search proxy) or type songs in by hand.'));
+  else{
+    const list=[...sc.values()].sort((a,b)=>b.c-a.c||a.t.localeCompare(b.t)),long=lens.reduce((a,b)=>b.n>a.n?b:a);
+    box.append(recCards([['Songs heard live',String(heard)],['Different songs',String(list.length)],['Average setlist',Math.round(lens.reduce((t,x)=>t+x.n,0)/lens.length)+' songs'],['Longest setlist',String(long.n),long.s.artist]]));
+    box.append(el('div','nsec','Most popular songs'),rankList(list.slice(0,10).map(x=>({t:x.t,sub:x.a,v:x.c+(x.c===1?' time':' times')}))));
+    if(list[0].c===1)box.append(el('p','sub','No song has repeated yet, so these are just the first ones alphabetically. Go to more than one night of a tour to see a real favorite.'));
+  }
+}
+function renderStats(){
+  $('tabOver').setAttribute('aria-pressed',String(spTab==='over'));$('tabPeople').setAttribute('aria-pressed',String(spTab==='people'));
+  $('spMain').hidden=spTab!=='over';$('spPeople').hidden=spTab!=='people';
+  const years=[...new Set(att().map(s=>s.date.slice(0,4)))].sort().reverse();
+  if(statScope!=='all'&&!years.includes(statScope))statScope='all';
+  const sc=$('spScope');sc.innerHTML='';sc.append(el('span','','Show charts and people stats for:'));
+  ['all',...years].forEach(y=>{const b=el('button','btn sm',y==='all'?'All time':y);b.type='button';if(y===statScope){b.style.background='var(--accent)';b.style.color='#fbf6e9';b.style.borderColor='var(--accent)'}b.onclick=()=>{statScope=y;renderStats()};sc.append(b)});
+  if(spTab==='over')renderOverview();else renderPeople();
+}
+function routeStats(){
+  const h=location.hash,on=h.startsWith('#stats'),ti=h==='#tiers',was=!$('statspage').hidden||!$('tierpage').hidden;
+  $('statspage').hidden=!on;$('tierpage').hidden=!ti;document.body.style.overflow=(on||ti)?'hidden':'';
+  if(on){spTab=h==='#stats-people'?'people':'over';renderStats();if(!was)$('statspage').scrollTop=0}
+  if(ti){renderTiers();if(!was)$('tierpage').scrollTop=0}
+}
+$('tierb').onclick=()=>{window.__navStats=true;location.hash='#tiers'};
+$('tierBack').onclick=()=>{if(window.__navStats){window.__navStats=false;history.back()}else{history.replaceState(null,'',location.pathname+location.search);routeStats()}};
+function goStatsTab(t){spTab=t;history.replaceState(null,'',t==='people'?'#stats-people':'#stats');renderStats();$('statspage').scrollTop=0}
+window.addEventListener('hashchange',routeStats);
+$('nerd').onclick=()=>{window.__navStats=true;location.hash='#stats'};
+$('spBack').onclick=()=>{if(window.__navStats){window.__navStats=false;history.back()}else{history.replaceState(null,'',location.pathname+location.search);routeStats()}};
+$('tabOver').onclick=()=>goStatsTab('over');$('tabPeople').onclick=()=>goStatsTab('people');
+function renderOverview(){
+  const body=$('spMain');body.innerHTML='';
+  const A=att();if(!A.length){body.append(el('p','','Nothing to analyse yet. Add a few past shows first.'));return}
   const firstYear={};[...A].sort((a,b)=>a.date.localeCompare(b.date)).forEach(s=>{const k=s.artist.trim().toLowerCase();if(!firstYear[k])firstYear[k]=s.date.slice(0,4)});
   const years=[...new Set(A.map(s=>s.date.slice(0,4)))].sort();
   const ST={};years.forEach(y=>{ST[y]=yearStats(A.filter(s=>s.date.startsWith(y)),firstYear)});
@@ -946,6 +1148,7 @@ function openNerd(){
     [best('n','Biggest year',v=>v+' shows'),best('hours','Hours champion',v=>d1(v)+' hours'),best('spent','Big spender',v=>mon(v)+' spent'),best('savings','Savvy shopper',v=>mon2(v)+' saved'),best('newA','Discovery year',v=>v+' new artists'),best('travelHrs','Long-haul year',v=>d1(v)+' hours travelling'),best('avgPrice','Priciest tickets',v=>mon2(v)+' average'),best('away','Most abroad',v=>v+' shows abroad')].filter(Boolean).forEach(r=>recs.append(r));
     if(recs.children.length){body.append(el('div','nsec','Records'),recs)}
   }
+  body.append(el('div','nsec','Breakdowns'),pieGrid(scoped()));
   // bar charts
   body.append(el('div','nsec','Shows per year'),barBlock(years.map(y=>({l:y,v:ST[y].n})),v=>v));
   if(years.some(y=>ST[y].spent))body.append(el('div','nsec','Spend per year'),barBlock(years.map(y=>({l:y,v:ST[y].spent||0,c:'var(--pumpkin)'})),mon));
@@ -958,9 +1161,7 @@ function openNerd(){
   // weekday
   const wd=Array(7).fill(0);A.forEach(s=>{wd[new Date(s.date+'T12:00:00').getDay()]++});
   body.append(el('div','nsec','Favorite night of the week'),barBlock(DAYS.map((d,i)=>({l:d.slice(0,3),v:wd[i],c:i===5||i===6?'var(--mustard)':'var(--olive)'})),v=>v));
-  showM($('ndlg'));
 }
-$('nerd').onclick=openNerd;$('nclose').onclick=()=>$('ndlg').close();
 
 /* ---------- Wrapped ---------- */
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -1140,6 +1341,7 @@ menu.addEventListener('click',e=>{if(e.target.closest('.mi'))closeMenu()});
 document.addEventListener('click',e=>{if(!menu.hidden&&!e.target.closest('.menuwrap'))closeMenu()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){closeMenu();mbtn.focus()}});
 render();
+routeStats();
 syncNow();document.addEventListener('visibilitychange',()=>{if(!document.hidden)syncNow()});
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script>
